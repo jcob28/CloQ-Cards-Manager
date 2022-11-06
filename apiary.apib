@@ -45,34 +45,52 @@ Opis aplikacji
 
 ` `
 
-## Employee Database  [/questions]
+## Employees Data [/employees]
 
-### List All Questions [GET]
-
+### List All Employees [GET]
++ Request (application/json)
+    + Headers
+            
+            Authentication: Token
+        
 + Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+    
+    + Body
+    
+            {    
+                [
                     {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
+                        "Message": "List of all employees: ",
+                        "employees": 
+                        [
+                            {
+                                "EmployeeID": 10010422,
+                                "Login": "jankow4822",
+                                "Department": "DepA",
+                                "ManagerID": 101,
+                                "PositionID": 53
+                            
+                            }, {
+                                "choice": "Python",
+                                "votes": 1024
+                            }, {
+                                "choice": "Objective-C",
+                                "votes": 512
+                            }, 
+                        ]
                     }
                 ]
             }
-        ]
+            
++ Response 400 (application/json)
 
+    + Body
+    
+            {
+                "Massage": "Bad Request"
+            }
+      
+            
 ### Create a New Question [POST]
 
 You may create your own question using this action. It takes a JSON
@@ -117,60 +135,4 @@ form of choices.
                         "votes": 0
                     }
                 ]
-            }
- 
-+ Response 400 (application/json)
-
-    + Body
-
-            {
-                "Message": "Bad Request"
-            }
-            
-+ Response 403 (application/json)
-
-    + Body
-
-            {
-                "Message": "Forbidden"
-            }
-
-+ Response 404 (application/json)
-
-    + Body
-
-            {
-                "Message": "Not Found"
-            }
-            
-+ Response 405 (application/json)
-
-    + Body
-
-            {
-                "Message": "Method Not Allowedr"
-            }
-
-+ Response 500 (application/json)
-
-    + Body
-
-            {
-                "Message": "Internal Server Error"
-            }
-            
-+ Response 502 (application/json)
-
-    + Body
-
-            {
-                "Message": "Bad Gateway"
-            }
-            
-+ Response 503 (application/json)
-
-    + Body
-
-            {
-                "Message": "Service Unavailable"
             }
