@@ -146,3 +146,28 @@ Opis aplikacji
             {
                 "Message": "Bad Request"
             }
+            
+### Edit [PUT/employees/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID}]
+
++ Parameters
+    + EmployeeID (number)
+    + Login (text)
+    + Department (text)
+    + ManagerID (number)
+    + PositionID (number)
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "Massage": "Post done"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "Massage": "Bad Request"
+            }
