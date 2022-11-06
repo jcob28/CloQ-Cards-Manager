@@ -136,3 +136,59 @@ form of choices.
                     }
                 ]
             }
+            
++ Response 400 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Bad Request"
+             }
+
++ Response 403 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Forbidden"
+             }
+
++ Response 404 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Not Found"
+             }
+
++ Response 405 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Method Not Allowedr"
+             }
+
++ Response 500 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Internal Server Error"
+             }
+
++ Response 502 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Bad Gateway"
+             }
+
++ Response 503 (application/json)
+
+     + Body
+
+             {
+                 "Message": "Service Unavailable"
+             }
