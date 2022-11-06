@@ -71,11 +71,17 @@ Opis aplikacji
                                 "PositionID": 53
                             
                             }, {
-                                "choice": "Python",
-                                "votes": 1024
+                                "EmployeeID": 10010432,
+                                "Login": "jankow4822",
+                                "Department": "DepA",
+                                "ManagerID": 101,
+                                "PositionID": 53
                             }, {
-                                "choice": "Objective-C",
-                                "votes": 512
+                                "EmployeeID": 10010420,
+                                "Login": "jankow4822",
+                                "Department": "DepA",
+                                "ManagerID": 101,
+                                "PositionID": 53
                             }, 
                         ]
                     }
@@ -89,8 +95,29 @@ Opis aplikacji
             {
                 "Massage": "Bad Request"
             }
-      
             
+### Delete [DELETE/employees/EmployeeID={EmployeeID}]
+
++ Parameters
+    + EmployeeID (number)
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "Massage": "Deleted"
+            }
+
++ Response 400 (application/json)
+
+    + Body
+    
+            {
+                "Massage": "Bad Request"
+            }            
+
 ### Create a New Question [POST]
 
 You may create your own question using this action. It takes a JSON
@@ -136,59 +163,3 @@ form of choices.
                     }
                 ]
             }
-            
-+ Response 400 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Bad Request"
-             }
-
-+ Response 403 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Forbidden"
-             }
-
-+ Response 404 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Not Found"
-             }
-
-+ Response 405 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Method Not Allowedr"
-             }
-
-+ Response 500 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Internal Server Error"
-             }
-
-+ Response 502 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Bad Gateway"
-             }
-
-+ Response 503 (application/json)
-
-     + Body
-
-             {
-                 "Message": "Service Unavailable"
-             }
