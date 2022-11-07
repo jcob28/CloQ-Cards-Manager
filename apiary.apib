@@ -1,9 +1,46 @@
 FORMAT: 1A
 HOST: https://systemgenerowaniakartczasupracy.apiblueprint.org/
 
-# System of generating employees' clockcards
+# WeWork
 
-It is an API
+It is an API of *WeWork* - System of generating employee's clockcards
+
+# Group Log-in-out
+
+## Log-in [/login/{?log,pass}]
+
+### Login [POST]
++ Parameters
+    
+    + log: user1 (string) - User's login to System
+    + pass: pass1 (string) - User's password to System
+    
++ Response 200 (application/json)
+
+        {
+            "Token": "1234567890"
+        }
+        
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
+        
+## Log-out [/logout]
+
+### Logout [DELETE]
++ Response 200 (application/json)
+
+        {
+            "Message": "Logout: Done"
+        }
+        
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
 
 
 # Group User API
@@ -39,7 +76,7 @@ It is an API
             "Meesage": "Add: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -52,7 +89,7 @@ It is an API
             "Meesage": "Edit: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -65,7 +102,7 @@ It is an API
             "Meesage": "Delete: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -75,10 +112,16 @@ It is an API
 + Response 200 (application/json)
 
         {
-            
+            "Login": "jankow4822",
+            "Password": 4932
+            "FirstName": "Jan",
+            "LastName": "Kowalski",
+            "AccountType": "Employee",
+            "E-mail": "jankowalski@gmail.com",
+            "AccountNo": "PL11240000000000009999117429"
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -114,7 +157,7 @@ It is an API
             "Meesage": "Add: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -127,7 +170,7 @@ It is an API
             "Meesage": "Edit: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -140,19 +183,13 @@ It is an API
             "Meesage": "Delete: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
         }
 
 ### List All Employees [GET]
-+ Request (application/json)
-
-    + Headers 
-        
-            Authentication: Token
-
 + Response 200 (application/json)
 
     + Body
@@ -187,12 +224,12 @@ It is an API
                 ]
             }
             
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
         }
-  
+
             
 # Group Manager API
 
@@ -210,11 +247,12 @@ It is an API
             "Meesage": "Add: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
         }
+
 
 ### Delete Manager [DELETE]
 + Response 200 (application/json)
@@ -223,7 +261,7 @@ It is an API
             "Meesage": "Delete: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -236,7 +274,7 @@ It is an API
             
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -253,14 +291,14 @@ It is an API
     + PositionName (string) - Position name's
     + Salary (int) - Salary assigned to position
 
-### List All Positions [POST]
+### List All Positions [GET]
 + Response 200 (application/json)
 
         {
         
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
@@ -279,17 +317,81 @@ It is an API
 
 # Group Register API
 
-## Register [/registers/{?EmployeeID,GateID,DateIn,HourIn,DateOut,HourOut}]
+## Register [/registers/{?RegisterID,EmployeeID,GateID,DateIn,TimeIn,DateOut,TimeOut}]
 
 + Parameters
 
+    + RegisterID (int) - Register's ID
     + EmployeeID (int) - Employee's ID
     + GateID (int) - Gate's ID
     + DateIn (date) - Start date of work
-    + HourIn (time) - Start time of work
+    + TimeIn (time) - Start time of work
     + DateOut (date) - End date of work
-    + HourOut (time) - End time of work
+    + TimeOut (time) - End time of work
 
+### Add New Register [POST]
++ Request
+
+        {
+            "RegisterID": 1,
+            "GateID": 1,
+            "DateIn": "2023-01-01",
+            "HourIn": "08:00",
+            "DateOut": "2023-01-01",
+            "HourOut": "16:00"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Add: Done."
+        }
+
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### Read Register [GET]
++ Response 200 (application/json)
+
+        {
+            
+        }
+
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### Delete Register [DELETE]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### Update Register [PUT]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Update: Done."
+        }
+
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
+        
 
 # Group Leave API
 
@@ -305,13 +407,48 @@ It is an API
     + Decision (bool) - Manager's approval/refusal of leave
 
 ### Add New Leave [POST]
++ Request
+
+        {
+            "LeaveID": 1,
+            "EmployeeID": 1,
+            "StartDate": "2.1.2023",
+            "EndDate": "3.1.2023",
+            "LeaveType": "sick",
+            "Acceptance": 1
+        }
+        
 + Response 200 (application/json)
 
         {
             "Meesage": "Add: Done."
         }
 
-+ Response 400 (application/json)
++ Response 400 (text/plain)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### Update Leave [PUT]
++ Request 
+
+        {
+            "LeaveID": 1,
+            "EmployeeID": 1,
+            "StartDate": "2.1.2023",
+            "EndDate": "3.1.2023",
+            "LeaveType": "sick",
+            "Acceptance": 1
+        }
+
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Update: Done."
+        }
+
++ Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
