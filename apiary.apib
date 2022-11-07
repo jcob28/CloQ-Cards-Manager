@@ -12,13 +12,13 @@ It is an API
 
 + Parameters
 
-    + Login (text)
-    + Password (number)
-    + FirstName (text)
-    + LastName (text)
-    + AccountType (text)
-    + Email (text)
-    + AccountNo (text)
+    + Login (string) - User's login
+    + Password (int) - User's password
+    + FirstName (string) - User's first name
+    + LastName (string) - User's last name
+    + AccountType (enum) - User's type of account
+    + Email (string) - User's e-mail address
+    + AccountNo (string) - User's login
 
 ### Add New User [POST]
 + Request
@@ -75,7 +75,7 @@ It is an API
 + Response 200 (application/json)
 
         {
-            "Meesage": "Delete: Done."
+            
         }
 
 + Response 400 (application/json)
@@ -91,11 +91,11 @@ It is an API
 
 + Parameters
 
-    + EmployeeID (number)
-    + Login (text)
-    + Department (text)
-    + ManagerID (number)
-    + PositionID (number)
+    + EmployeeID (int) - Employee's ID
+    + Login (string) - Employee's login
+    + Department (string) - Employee's department
+    + ManagerID (int) - Employee's manager's ID
+    + PositionID (int) - Employee's position's ID
 
 ### Add New Employee [POST/employees/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID]
 + Request
@@ -200,14 +200,14 @@ It is an API
 
 + Parameters
 
-    + ManagerID (number)
-    + Login (text)
+    + ManagerID (int) - Manager's ID
+    + Login (string) - Manager's login
 
 ### Add New Manager [POST]
 + Response 200 (application/json)
 
         {
-            "Meesage": "Delete: Done."
+            "Meesage": "Add: Done."
         }
 
 + Response 400 (application/json)
@@ -233,7 +233,7 @@ It is an API
 + Response 200 (application/json)
 
         {
-            "Meesage": "Delete: Done."
+            
         }
 
 + Response 400 (application/json)
@@ -249,53 +249,15 @@ It is an API
 
 + Parameters
 
-    + PositionID (number)
-    + PositionName (text)
-    + Salary (number)
+    + PositionID (int) - Position's ID
+    + PositionName (string) - Position name's
+    + Salary (int) - Salary assigned to position
 
 ### List All Positions [POST]
 + Response 200 (application/json)
 
         {
-            "Meesage": "Delete: Done."
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-# Group Register API
-
-## Register [/registers/{?EmployeeID,GateID,TimeIn,TimeOut}]
-
-+ Parameters
-
-    + EmployeeID (number)
-    + GateID (number)
-    + TimeIn (number)
-    + TimeOut (number)
-
-
-# Group Leave API
-
-## Leave [/leaves/{?LeaveID,EmployeeID,DateStart,DateEnd,LeaveType,Acceptance}]
-
-+ Parameters
-
-    + LeaveID (number)
-    + EmployeeID (number)
-    + DateStart (number)
-    + DateEnd (number)
-    + LeaveType (text)
-    + Acceptance (number)
-
-### Add New Leave [POST]
-+ Response 200 (application/json)
-
-        {
-            "Meesage": "Delete: Done."
+        
         }
 
 + Response 400 (application/json)
@@ -307,12 +269,50 @@ It is an API
 
 # Group Gate API
 
-## Gate [/gates/{?EmployeeID,Login,Department,ManagerID,PositionID}]
+## Gate [/gates/{?GateID,Login}]
 
 + Parameters
 
-    + EmployeeID (number)
-    + Login (text)
-    + Department (text)
-    + ManagerID (number)
-    + PositionID (number)
+    + GateID (int) - Gate's ID
+    + Login (string) - User's login
+
+
+# Group Register API
+
+## Register [/registers/{?EmployeeID,GateID,DateIn,HourIn,DateOut,HourOut}]
+
++ Parameters
+
+    + EmployeeID (int) - Employee's ID
+    + GateID (int) - Gate's ID
+    + DateIn (date) - Start date of work
+    + HourIn (time) - Start time of work
+    + DateOut (date) - End date of work
+    + HourOut (time) - End time of work
+
+
+# Group Leave API
+
+## Leave [/leaves/{?LeaveID,EmployeeID,DateStart,DateEnd,LeaveType,Decision}]
+
++ Parameters
+
+    + LeaveID (int) - Leave's ID
+    + EmployeeID (int) - Employee's ID
+    + DateStart (date) - Start date of leave
+    + DateEnd (date) - End date of leave
+    + LeaveType (string) - Leave's type
+    + Decision (bool) - Manager's approval/refusal of leave
+
+### Add New Leave [POST]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Add: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
