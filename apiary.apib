@@ -1,63 +1,165 @@
 FORMAT: 1A
 HOST: https://systemgenerowaniakartczasupracy.apiblueprint.org/
 
-# System generowania kart czasu pracy
+# System of generating employees' clockcards
 
-*Opis aplikacji*
+It is an API
 
-` `
 
-**Allowed HTTPs requests:**
+# Group User API
 
-`PUT`
+## User [/users/{?Login,Password,FirstName,LastName,AccountType,Email,AccountNo}]
 
-`POST`
++ Parameters
 
-`GET`
+    + Login (text)
+    + Password (number)
+    + FirstName (text)
+    + LastName (text)
+    + AccountType (text)
+    + Email (text)
+    + AccountNo (text)
 
-`DELETE`
+### Add New User [POST]
++ Request
 
-` `
+        {
+            "Login": "jankow4822",
+            "Password": 4932
+            "FirstName": "Jan",
+            "LastName": "Kowalski",
+            "AccountType": "Employee",
+            "E-mail": "jankowalski@gmail.com",
+            "AccountNo": "PL11240000000000009999117429"
+        }
+        
++ Response 200 (application/json)
 
-**Description of usual server responses:**
+        {
+            "Meesage": "Add: Done."
+        }
 
-`100` Continue
++ Response 400 (application/json)
 
-`200` OK
+        {
+            "Message": "Bad Request"
+        }
+        
+### Edit User [PUT]
 
-`201` Created
++ Response 200 (application/json)
 
-`204` No Content
+        {
+            "Meesage": "Edit: Done."
+        }
 
-`400` Bad Request
++ Response 400 (application/json)
 
-`403` Forbidden
+        {
+            "Message": "Bad Request"
+        }
 
-`404` Not Found
+### Delete User [DELETE]
 
-`405` Method Not Allowed
++ Response 200 (application/json)
 
-`500` Internal Server Error
+        {
+            "Meesage": "Delete: Done."
+        }
 
-`502` Bad Gateway
++ Response 400 (application/json)
 
-`503` Service Unavailable
+        {
+            "Message": "Bad Request"
+        }
 
-` `
+### List All Users [GET]
++ Response 200 (application/json)
 
-## Employees Data [/employees]
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+
+# Group Employee API
+
+## Employee [/employee/{?EmployeeID,Login,Department,ManagerID,PositionID}]
+
++ Parameters
+
+    + EmployeeID (number)
+    + Login (text)
+    + Department (text)
+    + ManagerID (number)
+    + PositionID (number)
+
+### Add New Employee [POST/employees/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID]
++ Request
+
+        {
+            "EmployeeID": 10010422,
+            "Login": "jankow4822",
+            "Department": "DepA",
+            "ManagerID": 101,
+            "PositionID": 53
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Add: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+        
+### Edit Employee [PUT/users/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID}]
+
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Edit: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### Delete Employee [DELETE/employees/EmployeeID={EmployeeID}]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
 
 ### List All Employees [GET]
 + Request (application/json)
 
-    + Headers
-   
-            Authentication: Token
+    + Headers 
         
+            Authentication: Token
+
 + Response 200 (application/json)
 
     + Body
-    
+
             {    
                 [
                     {
@@ -70,7 +172,6 @@ HOST: https://systemgenerowaniakartczasupracy.apiblueprint.org/
                                 "Department": "DepA",
                                 "ManagerID": 101,
                                 "PositionID": 53
-                            
                             }, {
                                 "EmployeeID": 10010432,
                                 "Login": "jankow4822",
@@ -91,84 +192,130 @@ HOST: https://systemgenerowaniakartczasupracy.apiblueprint.org/
             
 + Response 400 (application/json)
 
-    + Body
-    
-            {
-                "Massage": "Bad Request"
-            }
+        {
+            "Message": "Bad Request"
+        }
+  
             
+# Group Manager API
 
-### Add [POST/employees/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID}]
+## Manager [/managers/{?ManagerID,Login}]
 
 + Parameters
+
+    + ManagerID (number)
+    + Login (text)
+
+### Add New Manager [POST]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### Delete Manager [DELETE]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+### List All Managers [GET]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+
+# Group Position API
+
+## Position [/positions/{?PositionID,PositionName,Salary}]
+
++ Parameters
+
+    + PositionID (number)
+    + PositionName (text)
+    + Salary (number)
+
+### List All Positions [POST]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+# Group Register API
+
+## Register [/registers/{?EmployeeID,GateID,TimeIn,TimeOut}]
+
++ Parameters
+
+    + EmployeeID (number)
+    + GateID (number)
+    + TimeIn (number)
+    + TimeOut (number)
+
+
+# Group Leave API
+
+## Leave [/leaves/{?LeaveID,EmployeeID,DateStart,DateEnd,LeaveType,Acceptance}]
+
++ Parameters
+
+    + LeaveID (number)
+    + EmployeeID (number)
+    + DateStart (number)
+    + DateEnd (number)
+    + LeaveType (text)
+    + Acceptance (number)
+
+### Add New Leave [POST]
++ Response 200 (application/json)
+
+        {
+            "Meesage": "Delete: Done."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
+
+# Group Gate API
+
+## Gate [/gates/{?EmployeeID,Login,Department,ManagerID,PositionID}]
+
++ Parameters
+
     + EmployeeID (number)
     + Login (text)
     + Department (text)
     + ManagerID (number)
     + PositionID (number)
-
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "Message": "Post done"
-            }
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "Message": "Bad Request"
-            }
-            
-
-### Delete [DELETE/employees/EmployeeID={EmployeeID}]
-
-+ Parameters
-
-    + EmployeeID (number)
-
-
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "Message": "Deleted"
-            }
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "Message": "Bad Request"
-            }
-        
-
-### Edit [PUT/employees/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID}]
-
-+ Parameters
-    + EmployeeID (number)
-    + Login (text)
-    + Department (text)
-    + ManagerID (number)
-    + PositionID (number)
-
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "Message": "Edit done"
-            }
-
-+ Response 400 (application/json)
-
-    + Body
-    
-            {
-                "Message": "Bad Request"
-            }
