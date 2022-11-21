@@ -21,10 +21,16 @@ It is an API of *WeWork* - System of generating employee's clockcards
             "Token": "1234567890"
         }
         
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
+        }
+        
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
         }
         
 ## Log-out [/logout]
@@ -36,12 +42,17 @@ It is an API of *WeWork* - System of generating employee's clockcards
             "Message": "Logout: Done"
         }
         
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
 
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
 
 # Group User API
 
@@ -70,48 +81,10 @@ It is an API of *WeWork* - System of generating employee's clockcards
             "AccountNo": "PL11240000000000009999117429"
         }
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
-            "Meesage": "Add: Done."
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
-        }
-        
-### Edit User [PUT]
-+ Response 200 (application/json)
-
-        {
-            "Meesage": "Edit: Done."
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
-        }
-
-### Delete User [DELETE]
-+ Response 200 (application/json)
-
-        {
-            "Meesage": "Delete: Done."
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
-        }
-
-### List All Users [GET]
-+ Response 200 (application/json)
-
-        {
+            "ID": 1,
             "Login": "jankow4822",
             "Password": 4932
             "FirstName": "Jan",
@@ -121,12 +94,113 @@ It is an API of *WeWork* - System of generating employee's clockcards
             "AccountNo": "PL11240000000000009999117429"
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+        
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
+### Edit User [PUT]
++ Request
+
+        {
+            "Login": "jankow4822",
+            "Password": 4932
+            "FirstName": "Janusz",
+            "LastName": "Kowalski",
+            "AccountType": "Employee",
+            "E-mail": "januszkowalski@gmail.com",
+            "AccountNo": "PL11240000000000009999117429"
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "ID": 1,
+            "Login": "jankow4822",
+            "Password": 4932
+            "FirstName": "Janusz",
+            "LastName": "Kowalski",
+            "AccountType": "Employee",
+            "E-mail": "januszkowalski@gmail.com",
+            "AccountNo": "PL11240000000000009999117429"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+        
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
+### Delete User [DELETE]
++ Request
+
+        {
+           "ID": 1
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "Login": "jankow4822",
+            "Password": 4932
+            "FirstName": "Janusz",
+            "LastName": "Kowalski",
+            "AccountType": "Employee",
+            "E-mail": "januszkowalski@gmail.com",
+            "AccountNo": "PL11240000000000009999117429"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+        
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### List All Users [GET]
++ Response 200 (application/json)
+
+        {
+            "ID": 1,
+            "Login": "jankow4822",
+            "Password": 4932
+            "FirstName": "Jan",
+            "LastName": "Kowalski",
+            "AccountType": "Employee",
+            "E-mail": "jankowalski@gmail.com",
+            "AccountNo": "PL11240000000000009999117429"
+        }
+
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
 
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
 
 # Group Employee API
 
@@ -140,7 +214,39 @@ It is an API of *WeWork* - System of generating employee's clockcards
     + ManagerID (int) - Employee's manager's ID
     + PositionID (int) - Employee's position's ID
 
-### Add New Employee [POST/employees/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID]
+### Add New Employee [POST]
++ Request
+
+        {
+            "Login": "jankow4822",
+            "Department": "DepA",
+            "ManagerID": 101,
+            "PositionID": 53
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "EmployeeID": 10010422,
+            "Login": "jankow4822",
+            "Department": "DepA",
+            "ManagerID": 101,
+            "PositionID": 53
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+        
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
+### Edit Employee [PUT]
 + Request
 
         {
@@ -154,39 +260,52 @@ It is an API of *WeWork* - System of generating employee's clockcards
 + Response 200 (application/json)
 
         {
-            "Meesage": "Add: Done."
+            "EmployeeID": 10010422,  
+            "EmployeeID": 10010422,
+            "Login": "jankow4822",
+            "Department": "DepA",
+            "ManagerID": 101,
+            "PositionID": 53
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Delete Employee [DELETE]
++ Request
+
+        {
+            "EmployeeID": 10010422
         }
         
-### Edit Employee [PUT/users/EmployeeID={EmployeeID}&Login={Login}&Department={Department}&ManagerID={ManagerID}&PositionID={PositionID}]
 + Response 200 (application/json)
 
         {
-            "Meesage": "Edit: Done."
+            "Login": "jankow4822",
+            "Department": "DepA",
+            "ManagerID": 101,
+            "PositionID": 53
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
 
-### Delete Employee [DELETE/employees/EmployeeID={EmployeeID}]
-+ Response 200 (application/json)
++ Response 503 (application/json)
 
         {
-            "Meesage": "Delete: Done."
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
+            "Message": "Service Unavailable"
         }
 
 ### List All Employees [GET]
@@ -224,12 +343,18 @@ It is an API of *WeWork* - System of generating employee's clockcards
                 ]
             }
             
-+ Response 400 (text/plain)
++ Response 400 ((application/json)
 
         {
             "Message": "Bad Request"
         }
 
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
             
 # Group Manager API
 
@@ -241,32 +366,55 @@ It is an API of *WeWork* - System of generating employee's clockcards
     + Login (string) - Manager's login
 
 ### Add New Manager [POST]
-+ Response 200 (application/json)
++ Request
 
         {
-            "Meesage": "Add: Done."
+            "Login": "man01"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "ManagerID": 1,
+            "Login": "man01"
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
 
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
 
 ### Delete Manager [DELETE]
++ Request
+
+        {
+            "ManagerID": 1
+        }
+        
 + Response 200 (application/json)
 
         {
             "Meesage": "Delete: Done."
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
 
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
 
 # Group Position API
 
@@ -285,12 +433,18 @@ It is an API of *WeWork* - System of generating employee's clockcards
         
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
 
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+        
 
 # Group Gate API
 
@@ -320,7 +474,88 @@ It is an API of *WeWork* - System of generating employee's clockcards
 + Request
 
         {
+            "GateID": 1,
+            "DateIn": "2023-01-01",
+            "HourIn": "08:00",
+            "DateOut": "2023-01-01",
+            "HourOut": "16:00"
+        }
+        
++ Response 201 (application/json)
+
+        {
             "RegisterID": 1,
+            "GateID": 1,
+            "DateIn": "2023-01-01",
+            "HourIn": "08:00",
+            "DateOut": "2023-01-01",
+            "HourOut": "16:00"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Read Register [GET]
++ Response 200 (application/json)
+
+        {
+            
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Delete Register [DELETE]
++ Request
+
+        {
+            "RegisterID": 1,
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "GateID": 1,
+            "DateIn": "2023-01-01",
+            "HourIn": "08:00",
+            "DateOut": "2023-01-01",
+            "HourOut": "16:00"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
+### Update Register [PUT]
++ Request
+
+        {
             "GateID": 1,
             "DateIn": "2023-01-01",
             "HourIn": "08:00",
@@ -331,52 +566,24 @@ It is an API of *WeWork* - System of generating employee's clockcards
 + Response 200 (application/json)
 
         {
-            "Meesage": "Add: Done."
+            "RegisterID": 1,
+            "GateID": 1,
+            "DateIn": "2023-01-01",
+            "HourIn": "08:00",
+            "DateOut": "2023-01-01",
+            "HourOut": "16:00"
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
         }
-
-### Read Register [GET]
-+ Response 200 (application/json)
-
-        {
-            
-        }
-
-+ Response 400 (text/plain)
+ 
++ Response 503 (application/json)
 
         {
-            "Message": "Bad Request"
-        }
-
-### Delete Register [DELETE]
-+ Response 200 (application/json)
-
-        {
-            "Meesage": "Delete: Done."
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
-        }
-
-### Update Register [PUT]
-+ Response 200 (application/json)
-
-        {
-            "Meesage": "Update: Done."
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
+            "Message": "Service Unavailable"
         }
         
 
@@ -397,7 +604,6 @@ It is an API of *WeWork* - System of generating employee's clockcards
 + Request
 
         {
-            "LeaveID": 1,
             "EmployeeID": 1,
             "StartDate": "2.1.2023",
             "EndDate": "3.1.2023",
@@ -405,16 +611,27 @@ It is an API of *WeWork* - System of generating employee's clockcards
             "Acceptance": 1
         }
         
-+ Response 200 (application/json)
++ Response 201 (application/json)
 
         {
-            "Meesage": "Add: Done."
+            "LeaveID": 1,
+            "EmployeeID": 1,
+            "StartDate": "2.1.2023",
+            "EndDate": "3.1.2023",
+            "LeaveType": "sick",
+            "Acceptance": 1
         }
 
-+ Response 400 (text/plain)
++ Response 400 (application/json)
 
         {
             "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
         }
 
 ### Update Leave [PUT]
@@ -432,11 +649,22 @@ It is an API of *WeWork* - System of generating employee's clockcards
 + Response 200 (application/json)
 
         {
-            "Meesage": "Update: Done."
+            "LeaveID": 1,
+            "EmployeeID": 1,
+            "StartDate": "2.1.2023",
+            "EndDate": "3.1.2023",
+            "LeaveType": "sick",
+            "Acceptance": 1
         }
 
 + Response 400 (text/plain)
 
         {
             "Message": "Bad Request"
+        }
+        
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
         }
