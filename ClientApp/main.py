@@ -10,4 +10,6 @@ if __name__ == '__main__': #Aby nie można było go dołączyć do innych plikó
     while True:
         if login.logging(global_storage) == True :
             break
+    menu.show ()
+    menu.choose ()
         
