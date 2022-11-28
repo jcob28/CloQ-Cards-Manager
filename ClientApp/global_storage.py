@@ -2,5 +2,5 @@
 
 class GlobalStorage:
     login = ''
-    password = ''
+    password = 0
     token = ''
