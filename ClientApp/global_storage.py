@@ -3,4 +3,4 @@
 class GlobalStorage:
     login = ''
     password = 0
-    token = ''
+    token = 0

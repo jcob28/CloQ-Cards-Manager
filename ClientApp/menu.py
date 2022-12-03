@@ -7,7 +7,7 @@ class Menu :
         print('3.Wybierz miesiąc, aby zrobić zestawienie,\n') #zestawienie- wypłata, nieobecności, spóźnienia, przebyte urlopy
         print('4.Lista urlopów,\n') #dostępne urlopy
         if self.if_manager == True:
-            print ('5.Wybierz pracownika do sprawdzenia')
+            print ('5.Wybierz pracownika do sprawdzenia jego miesiąca')
 
     def choose (self) : #Główna metoda, która służy do wyboru opcji w menu|self, - daje dostep do zmiennych spoza metody 
         while True:
@@ -29,6 +29,12 @@ class Menu :
                 pass
             else:
                 print('Nie ma takiego wyboru! Wybierz jeszcze raz!')
+
+    def getDay (self):
+        pass
+    
+    def getMonth(self):
+        pass
 
         
 
