@@ -24,7 +24,3 @@ class Login :
         else:
             print("NIE zalogowano")
             return False
-
-
-
-    
