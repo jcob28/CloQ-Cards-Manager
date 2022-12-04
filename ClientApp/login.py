@@ -1,6 +1,6 @@
 from global_storage import GlobalStorage
 from hashlib import md5
-from requests import post
+from requests import post #post - wysyłanie danych na serwer, get - odczyt danych z serwera
 class Login :
     #temp_username = 'user123'
     #temp_password = 35223524413618242205997641121151244752 #haslo123
