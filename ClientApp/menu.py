@@ -1,3 +1,8 @@
+#from requests import post, get, put, delate # Biblioteka request służy do łączenia się z API 
+# get - pobieranie danych z serwera (odczyt)
+#post - dodanie danych na serwer    (zapis)
+#put - edycja danych na serwerze    (zmiana)
+#delate - usunięcie danych na serwerze  (usunięcie)
 class Menu :
 
     if_manager = False #czy uzytkownik jest menager
@@ -8,11 +13,11 @@ class Menu :
     def show (self): #metoda, ktora wyswietla menu |self, - daje dostep do zmiennych spoza metody 
         print('Wybierz opcję:\n')
         print ('1. Wyloguj mnie,\n')
-        print('2. Wybierz dzień do sprawdzenia,\n')
+        print('2. Wybierz dzień do sprawdzenia,\n') #dokładny opis w metodzie GetDay
         print('3.Wybierz miesiąc, aby zrobić zestawienie,\n') #zestawienie- wypłata, nieobecności, spóźnienia, przebyte urlopy
         print('4.Lista urlopów,\n') #dostępne urlopy
         if self.if_manager == True:
-            print ('5.Wybierz pracownika do sprawdzenia')
+            print ('5.Wybierz pracownika do sprawdzenia') #dokładny opis w metodzie showManagerMenu
 
     ############################################################
     """
