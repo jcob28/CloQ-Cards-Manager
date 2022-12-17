@@ -18,7 +18,8 @@ It is an API of *WeWork* - System of generating employee's clockcards
 + Response 200 (application/json)
 
         {
-            "Token": "1234567890"
+            "Token": 1234567890,
+            "AccountType": "Employee"
         }
         
 + Response 400 (application/json)
@@ -354,8 +355,54 @@ It is an API of *WeWork* - System of generating employee's clockcards
         {
             "Message": "Service Unavailable"
         }
-        
+
+## Employee - me at day [/employee/meatday]
+
+### Read Employee at day [GET]
++ Request
+    
+        {
+            "day": 25,
+            "month": 4,
+            "year": 2022
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {   
+                "Message" : "Arrives and departures at day"
+                "registers" :
+                [
+                    {
+                        "EmployeeID": 10010422,
+                        "TimeIn": 0801,
+                        "TimeOut": 0912
+                    }, {
+                        "EmployeeID": 10010422,
+                        "TimeIn": 1000,
+                        "TimeOut": 1400
+                    }, {
+                        "EmployeeID": 10010422,
+                        "TimeIn": 1430,
+                        "TimeOut": 1600
+                    }, 
+                ]
+            }
             
++ Response 400 ((application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
 # Group Manager API
 
 ## Manager [/managers/{?ManagerID,Login}]

@@ -24,23 +24,17 @@ class Login :
 
 
         payload = {"login":global_storage.login,"password":global_storage.password}
-        r= post ("http://192.168.3.3:8000/auth", json=payload) #funkcja wysyłająca request HTTP post (wysłanie danych na serwer) 
+        r= post (global_storage.url + "auth", json=payload) #funkcja wysyłająca request HTTP post (wysłanie danych na serwer) 
         # 1 arg - gdzie to ma być wysłane, 2 arg - co ma być wysłane
 
         if r.status_code==200:
             print ('Zalogowano')
             global_storage.token = r.json ()['token']
             print(global_storage.token)
+            if r.json ()['AccountType'] == 'Manager':
+                global_storage.if_manager = True
             return True
         else:
             print("NIE zalogowano")
             return False
         
-
-        '''if self.temp_username == global_storage.login and self.temp_password == global_storage.password:
-            print ('Zalogowano')
-            return True
-        else:
-            print("NIE zalogowano")
-            return False
-        '''

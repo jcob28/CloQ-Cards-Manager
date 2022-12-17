@@ -1,13 +1,14 @@
+from global_storage import GlobalStorage
 
-
-#from requests import post, get, put, delate # Biblioteka request służy do łączenia się z API 
+from requests import post, get, put, delete # Biblioteka request służy do łączenia się z API 
 # get - pobieranie danych z serwera (odczyt)
 #post - dodanie danych na serwer    (zapis)
 #put - edycja danych na serwerze    (zmiana)
 #delate - usunięcie danych na serwerze  (usunięcie)
 class Menu :
 
-    if_manager = False #czy uzytkownik jest menager
+    def __init__(self, global_storage: GlobalStorage):
+        self.gs = global_storage
 
     """
     Metoda show służy do wyświetlenia głównego menu.
@@ -42,7 +43,7 @@ class Menu :
                 self.getMonth()
             elif choice == 4:
                 self.getLeaves()
-            elif choice == 5 and self.if_manager == True:
+            elif choice == 5 and self.gs.if_manager == True:
                 self.showManagerMenu()
             else:
                 print('Nie ma takiego wyboru! Wybierz jeszcze raz!')
@@ -59,7 +60,16 @@ class Menu :
         year=int(dateArray[2]) #zamiana 3 elementu ze string na int
 
         print('Pobieranie z serwera...')
-        # Tutaj będzie wysyłanie requestu GET na serwer w celu podania dnia i uzyskania godzin przyjścia i wyjścia za ten dzień
+
+        # Tutaj jest wysyłanie requestu GET na serwer w celu podania dnia i uzyskania godzin przyjścia i wyjścia za ten dzień
+        payload = {"day":day,"month":month, 'year':year}
+        r = get(self.gs.url + 'employee/meatday', auth='Authorization: Token token='+str(self.gs.token), json=payload)
+        arriveTime = 0
+        departureTime = 0
+        registers = r.json () ['registers']
+        for register in registers :
+            print('Czas wejścia: ' + str(register['TimeIn']))
+            print('Czas wyjścia: ' + str(register['TimeOut']))
         print('Pobrano:')
         # Tutaj będzie wyświetlanie tych godzin.
 
