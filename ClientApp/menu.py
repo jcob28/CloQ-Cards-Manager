@@ -64,8 +64,8 @@ class Menu :
         # Tutaj jest wysyłanie requestu GET na serwer w celu podania dnia i uzyskania godzin przyjścia i wyjścia za ten dzień
         payload = {"day":day,"month":month, 'year':year}
         r = get(self.gs.url + 'employee/meatday', auth='Authorization: Token token='+str(self.gs.token), json=payload)
-        arriveTime = 0
-        departureTime = 0
+        #arriveTime = 0
+        #departureTime = 0
         registers = r.json () ['registers']
         for register in registers :
             print('Czas wejścia: ' + str(register['TimeIn']))
@@ -86,6 +86,21 @@ class Menu :
         print('Pobieranie z serwera...')
         # Tutaj będzie wysyłanie requestu GET na serwer w celu podania miesiąca
         # i uzyskania godzin przyjścia i wyjścia przez cały miesiąc oraz stawki godzinowej
+        payload = {'month':month, 'year':year}
+        r = get(self.gs.url + 'employee/meatmonth', auth='Authorization: Token token='+str(self.gs.token), json=payload)
+        #arriveTime = 0
+        #departureTime = 0
+        dni =[None] * 31
+        registers = r.json () ['registers']
+        for register in registers :
+            dayIn = register['DateIn']
+            dni [dayIn] = []
+            dni [dayIn].append (register['TimeIn'])
+            dni [dayIn].append (register['TimeOut'])
+        for i in range (0,31):
+            if dni[i] != None:
+                print(str(i+1) + dni[i])
+
         print('Pobrano:')
         # Tutaj będzie wyświetlanie miesięcznego raportu oraz wyliczanie wysokości wypłaty.
     

@@ -403,6 +403,56 @@ It is an API of *WeWork* - System of generating employee's clockcards
             "Message": "Service Unavailable"
         }
 
+
+## Employee - me at month [/employee/meatmonth]
+
+### Read Employee at month [GET]
++ Request
+    
+        {
+            "month": 4,
+            "year": 2022
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {   
+                "Message" : "Arrives and departures at month"
+                "registers" :
+                [
+                    {
+                        "EmployeeID": 10010422,
+                        "DayIn" : 12,
+                        "TimeIn": 0801,
+                        "TimeOut": 0912
+                    }, {
+                        "EmployeeID": 10010422,
+                        "DayIn" : 24,
+                        "TimeIn": 1000,
+                        "TimeOut": 1400
+                    }, {
+                        "EmployeeID": 10010422,
+                        "DayIn" : 4,
+                        "TimeIn": 1430,
+                        "TimeOut": 1600
+                    }, 
+                ]
+            }
+            
++ Response 400 ((application/json)
+
+        {
+            "Message": "Bad Request"
+        }
+
++ Response 503 (application/json)
+
+        {
+            "Message": "Service Unavailable"
+        }
+
 # Group Manager API
 
 ## Manager [/managers/{?ManagerID,Login}]
