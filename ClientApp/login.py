@@ -1,9 +1,11 @@
 from global_storage import GlobalStorage
 from hashlib import md5
+
 from requests import post #post - wysyłanie danych na serwer, get - odczyt danych z serwera
 class Login :
     #temp_username = 'user123'
     #temp_password = 35223524413618242205997641121151244752 #haslo123
+
 
     def logging (self, global_storage : GlobalStorage)->bool: #jesli wleci argument innego typu program wyrzuci wyjątek
         #self, - daje dostep do zmiennych spoza metody 
@@ -19,6 +21,7 @@ class Login :
         global_storage.password = int.from_bytes(md5_bites, 'big') #zamiana bajtow na inta, big oznacza ze najbardziej znaczacy bajt jest na początku
         #print(global_storage.password)
         # metoda from_bytes która konwertuje bajty na inty
+
 
         payload = {"login":global_storage.login,"password":global_storage.password}
         r= post ("http://192.168.3.3:8000/auth", json=payload) #funkcja wysyłająca request HTTP post (wysłanie danych na serwer) 
@@ -41,6 +44,3 @@ class Login :
             print("NIE zalogowano")
             return False
         '''
-
-
-    
