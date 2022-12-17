@@ -1,3 +1,5 @@
+
+
 #from requests import post, get, put, delate # Biblioteka request służy do łączenia się z API 
 # get - pobieranie danych z serwera (odczyt)
 #post - dodanie danych na serwer    (zapis)
@@ -34,6 +36,7 @@ class Menu :
             if choice == 1:
                 break
             elif choice == 2:
+
                 self.getDay()
             elif choice == 3:
                 self.getMonth()
@@ -100,3 +103,4 @@ class Menu :
         # uzyskania raportu zawierającego zaplanowane daty urlopów w tym roku.
         print('Pobrano:')
         # Tutaj będzie wyświetlanie raportu oraz wyliczanie ilości pozostałych dni urlopu.
+
