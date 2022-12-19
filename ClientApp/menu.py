@@ -110,10 +110,15 @@ class Menu :
     """
     def showManagerMenu(self):
         print('Pobieranie z serwera...')
-        # Tutaj będzie wysyłanie requestu GET na serwer w celu 
+        r = get(self.gs.url + 'employee/listformanager', auth='Authorization: Token token='+str(self.gs.token))
+        # Tutaj jest wysyłanie requestu GET na serwer w celu 
         # uzyskania listy pracowników.
         print('Pobrano:')
-        # Tutaj będzie wyświetlanie listy podwładnych.
+        employees = r.json () ['employees']
+        for employees in employees :
+            print('Imię pracownika: ' + str(employees['FirstName']))
+            print('Nazwisko pracownika: ' + str(employees['LastName']))
+        # Tutaj jest wyświetlanie listy podwładnych.
         # Będzie możliwość wyboru podwładnego.
         # Po wybraniu pokazane zostaną opcje:
         # Raport miesięczny, możliwość edycji godzin w wybrany dzień, export pliku csv.
@@ -123,9 +128,26 @@ class Menu :
     Metoda getLeaves służy do podania dni urlopowych pracownikowi.
     """
     def getLeaves(self):
+        dateStr=input('Podaj rok.\n') #data w stringu
+        year=int(dateStr) #zamiana ze string na int
+
         print('Pobieranie z serwera...')
-        # Tutaj będzie wysyłanie requestu GET na serwer w celu
+
+        # Tutaj jest wysyłanie requestu GET na serwer w celu
         # uzyskania raportu zawierającego zaplanowane daty urlopów w tym roku.
+        payload = {'year':year}
+        r = get(self.gs.url + 'employee/myleaves', auth='Authorization: Token token='+str(self.gs.token), json=payload)
+        leaves = r.json () ['leaves']
+
+        # Tutaj jest wyświetlanie raportu oraz wyliczanie ilości pozostałych dni urlopu.
+
+        for leaves in leaves :
+            print('Początek urlopu: ' + str(leaves['StartDate']))
+            print('Koniec urlopu: ' + str(leaves['EndDate']))
+            print('Rodzaj urlopu: ' + str(leaves['LeaveType']))
+            print('Zgoda na urlop: ' + str(leaves['Decision']))
         print('Pobrano:')
-        # Tutaj będzie wyświetlanie raportu oraz wyliczanie ilości pozostałych dni urlopu.
+       
+        
+        
 
