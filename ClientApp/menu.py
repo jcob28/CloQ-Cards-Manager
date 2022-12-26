@@ -84,7 +84,7 @@ class Menu :
         year=int(dateArray[1]) #zamiana 2 elementu ze string na int
 
         print('Pobieranie z serwera...')
-        # Tutaj będzie wysyłanie requestu GET na serwer w celu podania miesiąca
+        # Tutaj jest wysyłanie requestu GET na serwer w celu podania miesiąca
         # i uzyskania godzin przyjścia i wyjścia przez cały miesiąc oraz stawki godzinowej
         payload = {'month':month, 'year':year}
         r = get(self.gs.url + 'employee/meatmonth', auth='Authorization: Token token='+str(self.gs.token), json=payload)
@@ -115,11 +115,15 @@ class Menu :
         # uzyskania listy pracowników.
         print('Pobrano:')
         employees = r.json () ['employees']
-        for employees in employees :
-            print('Imię pracownika: ' + str(employees['FirstName']))
-            print('Nazwisko pracownika: ' + str(employees['LastName']))
+        for employee in employees :
+            print('ID pracownika: ' + str(employee['EmployeeId']))
+            print('Imię pracownika: ' + str(employee['FirstName']))
+            print('Nazwisko pracownika: ' + str(employee['LastName']))
         # Tutaj jest wyświetlanie listy podwładnych.
         # Będzie możliwość wyboru podwładnego.
+
+        choosenEmployee = input('Wybierz ')
+
         # Po wybraniu pokazane zostaną opcje:
         # Raport miesięczny, możliwość edycji godzin w wybrany dzień, export pliku csv.
 
