@@ -1,4 +1,5 @@
 from global_storage import GlobalStorage
+from employee_maganer import EmpolyeeManager
 
 from requests import post, get, put, delete # Biblioteka request służy do łączenia się z API 
 # get - pobieranie danych z serwera (odczyt)
@@ -13,14 +14,16 @@ class Menu :
     """
     Metoda show służy do wyświetlenia głównego menu.
     """
-    def show (self): #metoda, ktora wyswietla menu |self, - daje dostep do zmiennych spoza metody 
-        print('Wybierz opcję:\n')
-        print ('1. Wyloguj mnie,\n')
-        print('2. Wybierz dzień do sprawdzenia,\n') #dokładny opis w metodzie GetDay
-        print('3.Wybierz miesiąc, aby zrobić zestawienie,\n') #zestawienie- wypłata, nieobecności, spóźnienia, przebyte urlopy
-        print('4.Lista urlopów,\n') #dostępne urlopy
+    def show (self) -> str: #metoda, ktora wyswietla menu |self, - daje dostep do zmiennych spoza metody 
+        optionsStr="""Wybierz opcję:\n
+        1. Wyloguj mnie,\n
+        2. Wybierz dzień do sprawdzenia,\n
+        3.Wybierz miesiąc, aby zrobić zestawienie,\n
+        4.Lista urlopów,\n"""
         if self.if_manager == True:
-            print ('5.Wybierz pracownika do sprawdzenia') #dokładny opis w metodzie showManagerMenu
+            optionsStr += '5.Wybierz pracownika do sprawdzenia' #dokładny opis w metodzie showManagerMenu
+
+        return optionsStr
 
     ############################################################
     """
@@ -28,7 +31,7 @@ class Menu :
     """
     def choose (self) : #Główna metoda, która służy do wyboru opcji w menu|self, - daje dostep do zmiennych spoza metody 
         while True:
-            self.show()
+            print(self.show())
             try:
                 choice = int(input())
             except(ValueError):
@@ -37,7 +40,6 @@ class Menu :
             if choice == 1:
                 break
             elif choice == 2:
-
                 self.getDay()
             elif choice == 3:
                 self.getMonth()
@@ -122,7 +124,11 @@ class Menu :
         # Tutaj jest wyświetlanie listy podwładnych.
         # Będzie możliwość wyboru podwładnego.
 
-        choosenEmployee = input('Wybierz ')
+        choosenEmployee = input('Wybierz id pracownika: ')
+
+        employeeManager = EmpolyeeManager(self.gs, choosenEmployee)
+        print(employeeManager.optionString())
+        employeeManager.choose()
 
         # Po wybraniu pokazane zostaną opcje:
         # Raport miesięczny, możliwość edycji godzin w wybrany dzień, export pliku csv.
@@ -151,7 +157,3 @@ class Menu :
             print('Rodzaj urlopu: ' + str(leaves['LeaveType']))
             print('Zgoda na urlop: ' + str(leaves['Decision']))
         print('Pobrano:')
-       
-        
-        
-

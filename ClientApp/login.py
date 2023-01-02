@@ -11,19 +11,17 @@ class Login :
         #self, - daje dostep do zmiennych spoza metody 
         #funkcja zwraca wartość typu bool
         print('Podaj login')
-        global_storage.login=input()
+        login = input()
         print('Podaj hasło')
-        global_storage.password=input()
+        passwd = input()
 
-
-        passoword_bytes = global_storage.password.encode() #encode zwraca bajty ze stringa password
+        passoword_bytes = passwd.encode() #encode zwraca bajty ze stringa password
         md5_bites = md5(passoword_bytes).digest() #md5 wylicza md5 (hasz) z podanych bajtow, a digest zamienia obiekt md5 na bajty
-        global_storage.password = int.from_bytes(md5_bites, 'big') #zamiana bajtow na inta, big oznacza ze najbardziej znaczacy bajt jest na początku
-        #print(global_storage.password)
+        passwd = int.from_bytes(md5_bites, 'big') #zamiana bajtow na inta, big oznacza ze najbardziej znaczacy bajt jest na początku
+        #print(passwd)
         # metoda from_bytes która konwertuje bajty na inty
 
-
-        payload = {"login":global_storage.login,"password":global_storage.password}
+        payload = {"login":login,"password":passwd}
         r= post (global_storage.url + "auth", json=payload) #funkcja wysyłająca request HTTP post (wysłanie danych na serwer) 
         # 1 arg - gdzie to ma być wysłane, 2 arg - co ma być wysłane
 
@@ -37,4 +35,3 @@ class Login :
         else:
             print("NIE zalogowano")
             return False
-        
