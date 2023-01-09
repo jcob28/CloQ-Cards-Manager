@@ -1,3 +1,4 @@
+
 [submodule "API/public/swagger"]
 	path = API/public/swagger
 	url = git@github.com:swagger-api/swagger-ui.git
