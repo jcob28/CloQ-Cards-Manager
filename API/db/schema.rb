@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_151127) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
-    t.index "\"user_index\"", name: "index_users_on_user_index", unique: true
+    t.index ["login"], name: "index_users_on_login", unique: true
   end
 
   create_table "vacations", force: :cascade do |t|
