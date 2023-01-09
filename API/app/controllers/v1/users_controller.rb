@@ -1,6 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    before_action :authenticate_request, only: %i[ update destroy ]
+    before_action :authenticate_request, only: %i[ index show update destroy ]
 
     swagger_controller :users, 'Users'
 
