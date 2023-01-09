@@ -2371,3 +2371,31 @@ Started GET "/api" for ::1 at 2023-01-09 15:08:15 +0100
 Started GET "/" for 127.0.0.1 at 2023-01-09 15:09:20 +0100
   [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
 Started GET "/api" for 127.0.0.1 at 2023-01-09 15:09:23 +0100
+Started POST "/v1/users" for ::1 at 2023-01-09 15:14:23 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "email"=>"aaaaaa", "account_type"=>"admin", "account_no"=>"pl01234567890123456789012345", "first_name"=>"admin", "last_name"=>"adminowski", "user"=>{"login"=>"abc", "first_name"=>"admin", "last_name"=>"adminowski", "account_type"=>"admin", "email"=>"aaaaaa", "account_no"=>"pl01234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fa5cccb4c28>, params: {"login"=>"abc", "password"=>"[FILTERED]", "email"=>"aaaaaa", "account_type"=>"admin", "account_no"=>"pl01234567890123456789012345", "first_name"=>"admin", "last_name"=>"adminowski", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"abc", "first_name"=>"admin", "last_name"=>"adminowski", "account_type"=>"admin", "email"=>"aaaaaa", "account_no"=>"pl01234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:36:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:36:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "aaaaaa"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:36:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl01234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:36:in `create'
+  [1m[36mUser Create (4.2ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "abc"], ["first_name", "admin"], ["last_name", "adminowski"], ["account_type", "admin"], ["email", "aaaaaa"], ["account_no", "pl01234567890123456789012345"], ["created_at", "2023-01-09 14:14:23.958043"], ["updated_at", "2023-01-09 14:14:23.958043"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:36:in `create'
+Completed 201 Created in 242ms (Views: 1.2ms | ActiveRecord: 7.2ms | Allocations: 24880)
+
+
+Started POST "/v1/login" for ::1 at 2023-01-09 15:15:05 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 218ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1268)
+
+
