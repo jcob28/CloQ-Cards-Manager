@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    timeout (0.3.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    power_assert (2.0.3)
+    rake (13.0.6)
+    test-unit (3.5.7)
+      power_assert
+
+PLATFORMS
+  x86_64-darwin-22
+
+DEPENDENCIES
+  bundler
+  rake
+  test-unit
+  timeout!
+
+BUNDLED WITH
+   2.2.3

@@ -1,0 +1,52 @@
+<%= form_with(model: register) do |form| %>
+  <% if register.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(register.errors.count, "error") %> prohibited this register from being saved:</h2>
+
+      <ul>
+        <% register.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :register_id, style: "display: block" %>
+    <%= form.number_field :register_id %>
+  </div>
+
+  <div>
+    <%= form.label :employee_id, style: "display: block" %>
+    <%= form.text_field :employee_id %>
+  </div>
+
+  <div>
+    <%= form.label :gate_id, style: "display: block" %>
+    <%= form.text_field :gate_id %>
+  </div>
+
+  <div>
+    <%= form.label :date_in, style: "display: block" %>
+    <%= form.date_field :date_in %>
+  </div>
+
+  <div>
+    <%= form.label :time_in, style: "display: block" %>
+    <%= form.time_field :time_in %>
+  </div>
+
+  <div>
+    <%= form.label :date_out, style: "display: block" %>
+    <%= form.date_field :date_out %>
+  </div>
+
+  <div>
+    <%= form.label :time_out, style: "display: block" %>
+    <%= form.time_field :time_out %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

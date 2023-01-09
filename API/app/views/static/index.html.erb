@@ -1,0 +1,11 @@
+<h1> Strona głowna <h1>
+<p>
+Strona główna prostej aplikacji "System generowania kart czasu pracy"
+</p>
+<ul>
+<% @users.each do |user| %>
+<%= link_to user do %>
+    <li><%= user.last_name %> <%= user.login %> </li>
+<% end %>
+<% end %>
+</ul>

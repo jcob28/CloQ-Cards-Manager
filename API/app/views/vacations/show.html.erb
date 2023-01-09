@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @vacation %>
+
+<div>
+  <%= link_to "Edit this vacation", edit_vacation_path(@vacation) %> |
+  <%= link_to "Back to vacations", vacations_path %>
+
+  <%= button_to "Destroy this vacation", @vacation, method: :delete %>
+</div>

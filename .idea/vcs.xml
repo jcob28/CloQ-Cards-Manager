@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ServerApp" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ServerApp/public/swagger" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ServerApp" vcs="" />
   </component>
 </project>

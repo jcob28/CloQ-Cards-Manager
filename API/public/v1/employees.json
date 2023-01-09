@@ -1,0 +1,123 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "employees",
+  "apis": [
+    {
+      "path": "/v1/employees",
+      "operations": [
+        {
+          "summary": "Returns all employees' details",
+          "nickname": "V1::Employees#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/employees",
+      "operations": [
+        {
+          "summary": "Creates an employee",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Employees#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/employees/{id}",
+      "operations": [
+        {
+          "summary": "Returns an employee's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Employees#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/employees/{id}",
+      "operations": [
+        {
+          "summary": "Updates an employee's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Employees#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/employees/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an employee",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Employee ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Employees#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

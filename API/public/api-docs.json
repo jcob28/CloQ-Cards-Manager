@@ -1,0 +1,36 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "apis": [
+    {
+      "path": "/../v1/sessions.{format}",
+      "description": "Session"
+    },
+    {
+      "path": "/../v1/registers.{format}",
+      "description": "Registers"
+    },
+    {
+      "path": "/../v1/vacations.{format}",
+      "description": "Vacations"
+    },
+    {
+      "path": "/../v1/employees.{format}",
+      "description": "Employees"
+    },
+    {
+      "path": "/../v1/positions.{format}",
+      "description": "Positions"
+    },
+    {
+      "path": "/../v1/managers.{format}",
+      "description": "Managers"
+    },
+    {
+      "path": "/../v1/users.{format}",
+      "description": "Users"
+    }
+  ],
+  "authorizations": null
+}
