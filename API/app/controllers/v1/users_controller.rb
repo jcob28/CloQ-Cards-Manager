@@ -1,6 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    before_action :authenticate_request, only: %i[ index show update destroy ]
+    before_action :authenticate_request, only: %i[ show update destroy ]
 
     swagger_controller :users, 'Users'
 
@@ -31,12 +31,12 @@ module V1
     end
 
     def create
-      @user = User.new(user_params)
+      user = User.new(user_params)
 
-      if @user.save
-        render json: @user, status: :created
+      if user.save
+        render json: user, status: :created
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: user.errors, status: :unprocessable_entity
       end
     end
 
@@ -72,10 +72,6 @@ module V1
 
     def user_params
       params.permit(:login, :first_name, :last_name, :account_type, :email, :account_no, :password, :password_confirmation)
-    end
-
-    def update_params
-      params.permit(:password, :password_confirmation, :nickname, :bio, :preferred_style)
     end
   end
 end
