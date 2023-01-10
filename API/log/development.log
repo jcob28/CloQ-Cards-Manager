@@ -5105,3 +5105,1460 @@ Processing by V1::UsersController#show as JSON
 Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 1.2ms | Allocations: 2584)
 
 
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20221218113832)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar, "first_name" varchar, "last_name" varchar, "account_type" varchar, "email" varchar, "account_no" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218113832"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateManagers (20221218113842)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "managers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_1306270b4d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_managers_on_user_id" ON "managers" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218113842"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePositions (20221218113942)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "positions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "position_name" varchar, "salary" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218113942"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateGates (20221218114010)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "gates" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f5f5cd6088"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_gates_on_user_id" ON "gates" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218114010"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateEmployees (20221218114020)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "employees" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "department" varchar, "manager_id" integer NOT NULL, "position_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_dcfd3d4fc3"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_0fe1519b79"
+FOREIGN KEY ("manager_id")
+  REFERENCES "managers" ("id")
+, CONSTRAINT "fk_rails_8425ebe6a1"
+FOREIGN KEY ("position_id")
+  REFERENCES "positions" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_employees_on_user_id" ON "employees" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_employees_on_manager_id" ON "employees" ("manager_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_employees_on_position_id" ON "employees" ("position_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218114020"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateVacations (20221218114057)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "vacations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "employee_id" integer NOT NULL, "start_date" date, "end_date" date, "vacation_type" varchar, "decision" boolean, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_731ddac4b5"
+FOREIGN KEY ("employee_id")
+  REFERENCES "employees" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_vacations_on_employee_id" ON "vacations" ("employee_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218114057"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRegisters (20221218114117)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "registers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "employee_id" integer NOT NULL, "gate" integer, "date_in" date, "time_in" time, "date_out" date, "time_out" time, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_0425eb3c86"
+FOREIGN KEY ("employee_id")
+  REFERENCES "employees" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_registers_on_employee_id" ON "registers" ("employee_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221218114117"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddPasswordDigestToUsers (20221227135005)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221227135005"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddIndexToUsersIndex (20221227151127)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20221227151127"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-01-10 09:51:26.572736"], ["updated_at", "2023-01-10 09:51:26.572736"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:52:06 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6a5b18508>, params: {"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl01234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "abc"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "abc"], ["account_no", "pl01234567890123456789012345"], ["created_at", "2023-01-10 09:52:06.983230"], ["updated_at", "2023-01-10 09:52:06.983230"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 244ms (Views: 0.7ms | ActiveRecord: 3.7ms | Allocations: 24903)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:52:20 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"def", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"def", "account_no"=>"pl11234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"def", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"def", "account_no"=>"pl11234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6a6e9fcc0>, params: {"login"=>"def", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"def", "account_no"=>"pl11234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"def", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"def", "account_no"=>"pl11234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "def"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "def"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl11234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "def"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "def"], ["account_no", "pl11234567890123456789012345"], ["created_at", "2023-01-10 09:52:20.514864"], ["updated_at", "2023-01-10 09:52:20.514864"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 216ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 4241)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:52:31 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"ghi", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"ghi", "account_no"=>"pl21234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"ghi", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"ghi", "account_no"=>"pl21234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa2ee990>, params: {"login"=>"ghi", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"ghi", "account_no"=>"pl21234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"ghi", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"ghi", "account_no"=>"pl21234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "ghi"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ghi"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl21234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "ghi"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "ghi"], ["account_no", "pl21234567890123456789012345"], ["created_at", "2023-01-10 09:52:31.378508"], ["updated_at", "2023-01-10 09:52:31.378508"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 214ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 4238)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:52:45 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"jkl", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"jkl", "account_no"=>"pl31234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"jkl", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"jkl", "account_no"=>"pl31234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa3254b8>, params: {"login"=>"jkl", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"jkl", "account_no"=>"pl31234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"jkl", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"jkl", "account_no"=>"pl31234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "jkl"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jkl"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl31234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "jkl"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "jkl"], ["account_no", "pl31234567890123456789012345"], ["created_at", "2023-01-10 09:52:45.358706"], ["updated_at", "2023-01-10 09:52:45.358706"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 217ms (Views: 0.4ms | ActiveRecord: 1.8ms | Allocations: 4238)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:53:02 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"mno", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"mno", "account_no"=>"pl41234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"mno", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"mno", "account_no"=>"pl41234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa377998>, params: {"login"=>"mno", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"mno", "account_no"=>"pl41234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"mno", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"mno", "account_no"=>"pl41234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "mno"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "mno"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl41234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "mno"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "mno"], ["account_no", "pl41234567890123456789012345"], ["created_at", "2023-01-10 09:53:02.268207"], ["updated_at", "2023-01-10 09:53:02.268207"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 216ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 4237)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:53:15 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"pqr", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"pqr", "account_no"=>"pl51234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"pqr", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"pqr", "account_no"=>"pl51234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa3c5e18>, params: {"login"=>"pqr", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"pqr", "account_no"=>"pl51234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"pqr", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"pqr", "account_no"=>"pl51234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "pqr"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "pqr"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl51234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "pqr"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "pqr"], ["account_no", "pl51234567890123456789012345"], ["created_at", "2023-01-10 09:53:16.093543"], ["updated_at", "2023-01-10 09:53:16.093543"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 218ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 4222)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:53:28 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"stu", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"stu", "account_no"=>"pl61234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"stu", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"stu", "account_no"=>"pl61234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6a5bdaf40>, params: {"login"=>"stu", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"stu", "account_no"=>"pl61234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"stu", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"stu", "account_no"=>"pl61234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "stu"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "stu"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl61234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "stu"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "stu"], ["account_no", "pl61234567890123456789012345"], ["created_at", "2023-01-10 09:53:28.434866"], ["updated_at", "2023-01-10 09:53:28.434866"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 216ms (Views: 0.3ms | ActiveRecord: 1.8ms | Allocations: 4223)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:53:43 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"vwx", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"vwx", "account_no"=>"pl71234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"vwx", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"vwx", "account_no"=>"pl71234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa44dea8>, params: {"login"=>"vwx", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"vwx", "account_no"=>"pl71234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"vwx", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"vwx", "account_no"=>"pl71234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "vwx"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "vwx"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl71234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "vwx"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "vwx"], ["account_no", "pl71234567890123456789012345"], ["created_at", "2023-01-10 09:53:43.612646"], ["updated_at", "2023-01-10 09:53:43.612646"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 217ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 4223)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 10:53:56 +0100
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"yzz", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"yzz", "account_no"=>"pl81234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"yzz", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"yzz", "account_no"=>"pl81234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aaa83d68>, params: {"login"=>"yzz", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"yzz", "account_no"=>"pl81234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"yzz", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"yzz", "account_no"=>"pl81234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "yzz"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "yzz"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl81234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("login", "first_name", "last_name", "account_type", "email", "account_no", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["login", "yzz"], ["first_name", "abc"], ["last_name", "abc"], ["account_type", "abc"], ["email", "yzz"], ["account_no", "pl81234567890123456789012345"], ["created_at", "2023-01-10 09:53:56.285004"], ["updated_at", "2023-01-10 09:53:56.285004"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 201 Created in 214ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 4222)
+
+
+Started GET "/v1/users" for 127.0.0.1 at 2023-01-10 10:54:00 +0100
+Processing by V1::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/v1/users_controller.rb:15:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 2292)
+
+
+Started GET "/v1/users/1" for 127.0.0.1 at 2023-01-10 10:54:13 +0100
+Processing by V1::UsersController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:75:in `set_user'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1329)
+
+
+Started GET "/v1/users/8" for 127.0.0.1 at 2023-01-10 10:54:19 +0100
+Processing by V1::UsersController#show as JSON
+  Parameters: {"id"=>"8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:75:in `set_user'
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 657)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 10:55:14 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 216ms (Views: 0.6ms | ActiveRecord: 0.6ms | Allocations: 1129)
+
+
+Started PATCH "/v1/users/9" for 127.0.0.1 at 2023-01-10 10:56:01 +0100
+Processing by V1::UsersController#update as JSON
+  Parameters: {"email"=>"yzzz", "password"=>"[FILTERED]", "id"=>"9", "user"=>{"email"=>"yzzz"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:75:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :user. Context: { controller: V1::UsersController, action: update, request: #<ActionDispatch::Request:0x00007fe6aabda1d0>, params: {"email"=>"yzzz", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"update", "id"=>"9", "user"=>{"email"=>"yzzz"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:53:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? AND "users"."id" != ? LIMIT ?[0m  [["login", "yzz"], ["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:53:in `update'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "yzzz"], ["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:53:in `update'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? AND "users"."id" != ? LIMIT ?[0m  [["account_no", "pl81234567890123456789012345"], ["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:53:in `update'
+  [1m[36mUser Update (1.7ms)[0m  [1m[33mUPDATE "users" SET "email" = ?, "updated_at" = ?, "password_digest" = ? WHERE "users"."id" = ?[0m  [["email", "yzzz"], ["updated_at", "2023-01-10 09:56:02.131548"], ["password_digest", "[FILTERED]"], ["id", 9]]
+  ↳ app/controllers/v1/users_controller.rb:53:in `update'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:53:in `update'
+Completed 200 OK in 225ms (Views: 0.4ms | ActiveRecord: 3.4ms | Allocations: 5619)
+
+
+Started GET "/v1/users/9" for 127.0.0.1 at 2023-01-10 10:56:13 +0100
+Processing by V1::UsersController#show as JSON
+  Parameters: {"id"=>"9"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:75:in `set_user'
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 656)
+
+
+Started DELETE "/v1/users/9" for 127.0.0.1 at 2023-01-10 10:56:23 +0100
+Processing by V1::UsersController#destroy as JSON
+  Parameters: {"id"=>"9"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:75:in `set_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:68:in `destroy'
+  [1m[36mUser Destroy (1.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 9]]
+  ↳ app/controllers/v1/users_controller.rb:68:in `destroy'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:68:in `destroy'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 2441)
+
+
+Started GET "/v1/users" for 127.0.0.1 at 2023-01-10 10:56:44 +0100
+Processing by V1::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/v1/users_controller.rb:15:in `index'
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 1971)
+
+
+Started POST "/v1/positions" for 127.0.0.1 at 2023-01-10 10:57:15 +0100
+Processing by V1::PositionsController#create as JSON
+  Parameters: {"position_name"=>"Pracownik", "salary"=>3500, "position"=>{"position_name"=>"Pracownik", "salary"=>3500}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :position. Context: { controller: V1::PositionsController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa6c93d0>, params: {"position_name"=>"Pracownik", "salary"=>3500, "controller"=>"v1/positions", "action"=>"create", "position"=>{"position_name"=>"Pracownik", "salary"=>3500}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mPosition Create (0.9ms)[0m  [1m[32mINSERT INTO "positions" ("position_name", "salary", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["position_name", "Pracownik"], ["salary", 3500], ["created_at", "2023-01-10 09:57:15.948198"], ["updated_at", "2023-01-10 09:57:15.948198"]]
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+Completed 201 Created in 15ms (Views: 0.3ms | ActiveRecord: 2.4ms | Allocations: 16317)
+
+
+Started POST "/v1/positions" for 127.0.0.1 at 2023-01-10 10:57:31 +0100
+Processing by V1::PositionsController#create as JSON
+  Parameters: {"position_name"=>"Kierownik", "salary"=>7500, "position"=>{"position_name"=>"Kierownik", "salary"=>7500}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :position. Context: { controller: V1::PositionsController, action: create, request: #<ActionDispatch::Request:0x00007fe6aae14c70>, params: {"position_name"=>"Kierownik", "salary"=>7500, "controller"=>"v1/positions", "action"=>"create", "position"=>{"position_name"=>"Kierownik", "salary"=>7500}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mPosition Create (0.4ms)[0m  [1m[32mINSERT INTO "positions" ("position_name", "salary", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["position_name", "Kierownik"], ["salary", 7500], ["created_at", "2023-01-10 09:57:31.188547"], ["updated_at", "2023-01-10 09:57:31.188547"]]
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+Completed 201 Created in 6ms (Views: 0.3ms | ActiveRecord: 1.8ms | Allocations: 2414)
+
+
+Started POST "/v1/positions" for 127.0.0.1 at 2023-01-10 10:57:52 +0100
+Processing by V1::PositionsController#create as JSON
+  Parameters: {"position_name"=>"Z-ca kierownika", "salary"=>6000, "position"=>{"position_name"=>"Z-ca kierownika", "salary"=>6000}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :position. Context: { controller: V1::PositionsController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa7d9fb8>, params: {"position_name"=>"Z-ca kierownika", "salary"=>6000, "controller"=>"v1/positions", "action"=>"create", "position"=>{"position_name"=>"Z-ca kierownika", "salary"=>6000}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mPosition Create (0.6ms)[0m  [1m[32mINSERT INTO "positions" ("position_name", "salary", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["position_name", "Z-ca kierownika"], ["salary", 6000], ["created_at", "2023-01-10 09:57:52.261493"], ["updated_at", "2023-01-10 09:57:52.261493"]]
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+Completed 201 Created in 7ms (Views: 0.3ms | ActiveRecord: 1.6ms | Allocations: 2414)
+
+
+Started POST "/v1/positions" for 127.0.0.1 at 2023-01-10 10:58:14 +0100
+Processing by V1::PositionsController#create as JSON
+  Parameters: {"position_name"=>"Dyrektor", "salary"=>11000, "position"=>{"position_name"=>"Dyrektor", "salary"=>11000}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :position. Context: { controller: V1::PositionsController, action: create, request: #<ActionDispatch::Request:0x00007fe6ac038de8>, params: {"position_name"=>"Dyrektor", "salary"=>11000, "controller"=>"v1/positions", "action"=>"create", "position"=>{"position_name"=>"Dyrektor", "salary"=>11000}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mPosition Create (0.4ms)[0m  [1m[32mINSERT INTO "positions" ("position_name", "salary", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["position_name", "Dyrektor"], ["salary", 11000], ["created_at", "2023-01-10 09:58:14.551752"], ["updated_at", "2023-01-10 09:58:14.551752"]]
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+Completed 201 Created in 22ms (Views: 0.3ms | ActiveRecord: 1.1ms | Allocations: 2415)
+
+
+Started POST "/v1/positions" for 127.0.0.1 at 2023-01-10 10:58:25 +0100
+Processing by V1::PositionsController#create as JSON
+  Parameters: {"position_name"=>"Prezes", "salary"=>30000, "position"=>{"position_name"=>"Prezes", "salary"=>30000}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :position. Context: { controller: V1::PositionsController, action: create, request: #<ActionDispatch::Request:0x00007fe6a5a4b008>, params: {"position_name"=>"Prezes", "salary"=>30000, "controller"=>"v1/positions", "action"=>"create", "position"=>{"position_name"=>"Prezes", "salary"=>30000}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mPosition Create (0.4ms)[0m  [1m[32mINSERT INTO "positions" ("position_name", "salary", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["position_name", "Prezes"], ["salary", 30000], ["created_at", "2023-01-10 09:58:25.383852"], ["updated_at", "2023-01-10 09:58:25.383852"]]
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:39:in `create'
+Completed 201 Created in 6ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 2415)
+
+
+Started GET "/v1/positions" for 127.0.0.1 at 2023-01-10 10:58:31 +0100
+Processing by V1::PositionsController#index as JSON
+  [1m[36mPosition Load (0.2ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  ↳ app/controllers/v1/positions_controller.rb:16:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.2ms | Allocations: 1266)
+
+
+Started GET "/v1/positions/1" for 127.0.0.1 at 2023-01-10 10:58:45 +0100
+Processing by V1::PositionsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mPosition Load (0.2ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+  [1m[36mCACHE Position Load (0.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:26:in `show'
+No template found for V1::PositionsController#show, rendering head :no_content
+Completed 204 No Content in 17ms (ActiveRecord: 0.2ms | Allocations: 4473)
+
+
+Started GET "/v1/positions/2" for 127.0.0.1 at 2023-01-10 10:58:52 +0100
+Processing by V1::PositionsController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+  [1m[36mCACHE Position Load (0.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:26:in `show'
+No template found for V1::PositionsController#show, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.1ms | Allocations: 922)
+
+
+Started GET "/v1/positions" for 127.0.0.1 at 2023-01-10 10:59:50 +0100
+Processing by V1::PositionsController#index as JSON
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  ↳ app/controllers/v1/positions_controller.rb:16:in `index'
+Completed 200 OK in 2ms (Views: 2.1ms | ActiveRecord: 0.1ms | Allocations: 1141)
+
+
+Started GET "/v1/positions" for 127.0.0.1 at 2023-01-10 10:59:51 +0100
+Processing by V1::PositionsController#index as JSON
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  ↳ app/controllers/v1/positions_controller.rb:16:in `index'
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.1ms | Allocations: 1141)
+
+
+Started GET "/v1/positions" for 127.0.0.1 at 2023-01-10 11:01:00 +0100
+Processing by V1::PositionsController#index as JSON
+  [1m[36mPosition Load (0.7ms)[0m  [1m[34mSELECT "positions".* FROM "positions"[0m
+  ↳ app/controllers/v1/positions_controller.rb:16:in `index'
+Completed 200 OK in 11ms (Views: 6.8ms | ActiveRecord: 1.9ms | Allocations: 4710)
+
+
+Started GET "/v1/positions/2" for 127.0.0.1 at 2023-01-10 11:01:02 +0100
+Processing by V1::PositionsController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mPosition Load (0.2ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1190)
+
+
+Started GET "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:01:06 +0100
+Processing by V1::PositionsController#show as JSON
+  Parameters: {"id"=>"5"}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 592)
+
+
+Started PATCH "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:01:43 +0100
+Processing by V1::PositionsController#update as JSON
+  Parameters: {"position_name"=>"CEO", "id"=>"5", "position"=>{"position_name"=>"CEO"}}
+  [1m[36mPosition Load (0.2ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms | Allocations: 891)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:8:in `authenticate_request'
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:01:52 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 218ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 7042)
+
+
+Started PATCH "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:02:03 +0100
+Processing by V1::PositionsController#update as JSON
+  Parameters: {"position_name"=>"CEO", "id"=>"5", "position"=>{"position_name"=>"CEO"}}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :position. Context: { controller: V1::PositionsController, action: update, request: #<ActionDispatch::Request:0x00007fe6a567edd0>, params: {"position_name"=>"CEO", "controller"=>"v1/positions", "action"=>"update", "id"=>"5", "position"=>{"position_name"=>"CEO"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:55:in `update'
+  [1m[36mPosition Update (0.4ms)[0m  [1m[33mUPDATE "positions" SET "position_name" = ?, "updated_at" = ? WHERE "positions"."id" = ?[0m  [["position_name", "CEO"], ["updated_at", "2023-01-10 10:02:03.119986"], ["id", 5]]
+  ↳ app/controllers/v1/positions_controller.rb:55:in `update'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:55:in `update'
+Completed 200 OK in 42ms (Views: 0.1ms | ActiveRecord: 2.5ms | Allocations: 3559)
+
+
+Started PATCH "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:02:32 +0100
+Processing by V1::PositionsController#update as JSON
+  Parameters: {"position_name"=>"CEO", "id"=>"5", "position"=>{"position_name"=>"CEO"}}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :position. Context: { controller: V1::PositionsController, action: update, request: #<ActionDispatch::Request:0x00007fe6a5b8fb80>, params: {"position_name"=>"CEO", "controller"=>"v1/positions", "action"=>"update", "id"=>"5", "position"=>{"position_name"=>"CEO"}} }[0m
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 9917)
+
+
+Started GET "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:02:36 +0100
+Processing by V1::PositionsController#show as JSON
+  Parameters: {"id"=>"5"}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 608)
+
+
+Started PATCH "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:02:43 +0100
+Processing by V1::PositionsController#update as JSON
+  Parameters: {"position_name"=>"Prezes", "id"=>"5", "position"=>{"position_name"=>"Prezes"}}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :position. Context: { controller: V1::PositionsController, action: update, request: #<ActionDispatch::Request:0x00007fe6aa4ce698>, params: {"position_name"=>"Prezes", "controller"=>"v1/positions", "action"=>"update", "id"=>"5", "position"=>{"position_name"=>"Prezes"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:55:in `update'
+  [1m[36mPosition Update (0.4ms)[0m  [1m[33mUPDATE "positions" SET "position_name" = ?, "updated_at" = ? WHERE "positions"."id" = ?[0m  [["position_name", "Prezes"], ["updated_at", "2023-01-10 10:02:43.382549"], ["id", 5]]
+  ↳ app/controllers/v1/positions_controller.rb:55:in `update'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/positions_controller.rb:55:in `update'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 2925)
+
+
+Started GET "/v1/positions/5" for 127.0.0.1 at 2023-01-10 11:02:47 +0100
+Processing by V1::PositionsController#show as JSON
+  Parameters: {"id"=>"5"}
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/positions_controller.rb:77:in `set_position'
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 592)
+
+
+Started POST "/v1/managers" for 127.0.0.1 at 2023-01-10 11:03:25 +0100
+Processing by V1::ManagersController#create as JSON
+  Parameters: {"user_id"=>1, "manager"=>{"user_id"=>1}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :manager. Context: { controller: V1::ManagersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa552650>, params: {"user_id"=>1, "controller"=>"v1/managers", "action"=>"create", "manager"=>{"user_id"=>1}} }[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+  [1m[36mManager Create (0.6ms)[0m  [1m[32mINSERT INTO "managers" ("user_id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["user_id", 1], ["created_at", "2023-01-10 10:03:25.320808"], ["updated_at", "2023-01-10 10:03:25.320808"]]
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+Completed 201 Created in 21ms (Views: 0.3ms | ActiveRecord: 2.1ms | Allocations: 20073)
+
+
+Started POST "/v1/managers" for 127.0.0.1 at 2023-01-10 11:03:30 +0100
+Processing by V1::ManagersController#create as JSON
+  Parameters: {"user_id"=>2, "manager"=>{"user_id"=>2}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :manager. Context: { controller: V1::ManagersController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa7597c8>, params: {"user_id"=>2, "controller"=>"v1/managers", "action"=>"create", "manager"=>{"user_id"=>2}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+  [1m[36mManager Create (0.4ms)[0m  [1m[32mINSERT INTO "managers" ("user_id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["user_id", 2], ["created_at", "2023-01-10 10:03:30.090542"], ["updated_at", "2023-01-10 10:03:30.090542"]]
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:36:in `create'
+Completed 201 Created in 8ms (Views: 0.2ms | ActiveRecord: 1.9ms | Allocations: 3233)
+
+
+Started GET "/v1/managers" for 127.0.0.1 at 2023-01-10 11:03:37 +0100
+Processing by V1::ManagersController#index as JSON
+  [1m[36mManager Load (0.2ms)[0m  [1m[34mSELECT "managers".* FROM "managers"[0m
+  ↳ app/controllers/v1/managers_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.2ms | Allocations: 921)
+
+
+Started PATCH "/v1/managers/2" for 127.0.0.1 at 2023-01-10 11:04:00 +0100
+Processing by V1::ManagersController#update as JSON
+  Parameters: {"user_id"=>3, "id"=>"2", "manager"=>{"user_id"=>3}}
+  [1m[36mManager Load (0.2ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:73:in `set_manager'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :manager. Context: { controller: V1::ManagersController, action: update, request: #<ActionDispatch::Request:0x00007fe6aae058b0>, params: {"user_id"=>3, "controller"=>"v1/managers", "action"=>"update", "id"=>"2", "manager"=>{"user_id"=>3}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mManager Update (0.4ms)[0m  [1m[33mUPDATE "managers" SET "user_id" = ?, "updated_at" = ? WHERE "managers"."id" = ?[0m  [["user_id", 3], ["updated_at", "2023-01-10 10:04:00.508236"], ["id", 2]]
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 1.7ms | Allocations: 4344)
+
+
+Started PATCH "/v1/managers/2" for 127.0.0.1 at 2023-01-10 11:04:13 +0100
+Processing by V1::ManagersController#update as JSON
+  Parameters: {"user_id"=>3, "id"=>"2", "manager"=>{"user_id"=>3}}
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:73:in `set_manager'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :manager. Context: { controller: V1::ManagersController, action: update, request: #<ActionDispatch::Request:0x00007fe6a573ffd0>, params: {"user_id"=>3, "controller"=>"v1/managers", "action"=>"update", "id"=>"2", "manager"=>{"user_id"=>3}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 1.9ms | Allocations: 12700)
+
+
+Started GET "/v1/managers" for 127.0.0.1 at 2023-01-10 11:04:22 +0100
+Processing by V1::ManagersController#index as JSON
+  [1m[36mManager Load (0.2ms)[0m  [1m[34mSELECT "managers".* FROM "managers"[0m
+  ↳ app/controllers/v1/managers_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.2ms | Allocations: 856)
+
+
+Started PATCH "/v1/managers/2" for 127.0.0.1 at 2023-01-10 11:04:30 +0100
+Processing by V1::ManagersController#update as JSON
+  Parameters: {"user_id"=>2, "id"=>"2", "manager"=>{"user_id"=>2}}
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:73:in `set_manager'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :manager. Context: { controller: V1::ManagersController, action: update, request: #<ActionDispatch::Request:0x00007fe6a60477b8>, params: {"user_id"=>2, "controller"=>"v1/managers", "action"=>"update", "id"=>"2", "manager"=>{"user_id"=>2}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mManager Update (0.5ms)[0m  [1m[33mUPDATE "managers" SET "user_id" = ?, "updated_at" = ? WHERE "managers"."id" = ?[0m  [["user_id", 2], ["updated_at", "2023-01-10 10:04:30.241971"], ["id", 2]]
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:51:in `update'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.8ms | Allocations: 3787)
+
+
+Started GET "/v1/managers" for 127.0.0.1 at 2023-01-10 11:04:32 +0100
+Processing by V1::ManagersController#index as JSON
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers"[0m
+  ↳ app/controllers/v1/managers_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms | Allocations: 800)
+
+
+Started GET "/v1/managers/1" for 127.0.0.1 at 2023-01-10 11:04:39 +0100
+Processing by V1::ManagersController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mManager Load (0.5ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:73:in `set_manager'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 584)
+
+
+Started GET "/v1/managers/2" for 127.0.0.1 at 2023-01-10 11:04:42 +0100
+Processing by V1::ManagersController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:73:in `set_manager'
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 581)
+
+
+Started DELETE "/v1/managers/2" for 127.0.0.1 at 2023-01-10 11:04:51 +0100
+Processing by V1::ManagersController#destroy as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mManager Load (0.5ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/managers_controller.rb:73:in `set_manager'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:66:in `destroy'
+  [1m[36mManager Destroy (0.8ms)[0m  [1m[31mDELETE FROM "managers" WHERE "managers"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/v1/managers_controller.rb:66:in `destroy'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/managers_controller.rb:66:in `destroy'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 2380)
+
+
+Started GET "/v1/managers" for 127.0.0.1 at 2023-01-10 11:04:55 +0100
+Processing by V1::ManagersController#index as JSON
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers"[0m
+  ↳ app/controllers/v1/managers_controller.rb:15:in `index'
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.1ms | Allocations: 705)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:06:00 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 234ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 7368)
+
+
+Started POST "/v1/employees" for 127.0.0.1 at 2023-01-10 11:07:09 +0100
+Processing by V1::EmployeesController#create as JSON
+  Parameters: {"user_id"=>3, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "employee"=>{"user_id"=>3, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :employee. Context: { controller: V1::EmployeesController, action: create, request: #<ActionDispatch::Request:0x00007fe6ac2fa7c0>, params: {"user_id"=>3, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "controller"=>"v1/employees", "action"=>"create", "employee"=>{"user_id"=>3, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mPosition Load (0.4ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mEmployee Create (1.4ms)[0m  [1m[32mINSERT INTO "employees" ("user_id", "department", "manager_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 3], ["department", "Sklep"], ["manager_id", 1], ["position_id", 1], ["created_at", "2023-01-10 10:07:09.425678"], ["updated_at", "2023-01-10 10:07:09.425678"]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+Completed 201 Created in 34ms (Views: 0.3ms | ActiveRecord: 4.9ms | Allocations: 30479)
+
+
+Started POST "/v1/employees" for 127.0.0.1 at 2023-01-10 11:07:25 +0100
+Processing by V1::EmployeesController#create as JSON
+  Parameters: {"user_id"=>4, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "employee"=>{"user_id"=>4, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :employee. Context: { controller: V1::EmployeesController, action: create, request: #<ActionDispatch::Request:0x00007fe6a5d57b48>, params: {"user_id"=>4, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "controller"=>"v1/employees", "action"=>"create", "employee"=>{"user_id"=>4, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mEmployee Create (0.4ms)[0m  [1m[32mINSERT INTO "employees" ("user_id", "department", "manager_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 4], ["department", "Sklep"], ["manager_id", 1], ["position_id", 1], ["created_at", "2023-01-10 10:07:25.904514"], ["updated_at", "2023-01-10 10:07:25.904514"]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+Completed 201 Created in 10ms (Views: 0.3ms | ActiveRecord: 1.6ms | Allocations: 4833)
+
+
+Started POST "/v1/employees" for 127.0.0.1 at 2023-01-10 11:07:29 +0100
+Processing by V1::EmployeesController#create as JSON
+  Parameters: {"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "employee"=>{"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :employee. Context: { controller: V1::EmployeesController, action: create, request: #<ActionDispatch::Request:0x00007fe6a71217c8>, params: {"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "controller"=>"v1/employees", "action"=>"create", "employee"=>{"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mEmployee Create (0.4ms)[0m  [1m[32mINSERT INTO "employees" ("user_id", "department", "manager_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["department", "Sklep"], ["manager_id", 1], ["position_id", 1], ["created_at", "2023-01-10 10:07:29.800873"], ["updated_at", "2023-01-10 10:07:29.800873"]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+Completed 201 Created in 10ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 4830)
+
+
+Started GET "/v1/employees" for 127.0.0.1 at 2023-01-10 11:07:33 +0100
+Processing by V1::EmployeesController#index as JSON
+  [1m[36mEmployee Load (0.2ms)[0m  [1m[34mSELECT "employees".* FROM "employees"[0m
+  ↳ app/controllers/v1/employees_controller.rb:14:in `index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms | Allocations: 1092)
+
+
+Started GET "/v1/employees/1" for 127.0.0.1 at 2023-01-10 11:07:45 +0100
+Processing by V1::EmployeesController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mEmployee Load (0.2ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1199)
+
+
+Started GET "/v1/employees/2" for 127.0.0.1 at 2023-01-10 11:07:48 +0100
+Processing by V1::EmployeesController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 602)
+
+
+Started GET "/v1/employees/3" for 127.0.0.1 at 2023-01-10 11:07:49 +0100
+Processing by V1::EmployeesController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 602)
+
+
+Started PATCH "/v1/employees/1" for 127.0.0.1 at 2023-01-10 11:08:11 +0100
+Processing by V1::EmployeesController#update as JSON
+  Parameters: {"department"=>"Biuro", "id"=>"1", "employee"=>{"department"=>"Biuro"}}
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :employee. Context: { controller: V1::EmployeesController, action: update, request: #<ActionDispatch::Request:0x00007fe6aca6aff0>, params: {"department"=>"Biuro", "controller"=>"v1/employees", "action"=>"update", "id"=>"1", "employee"=>{"department"=>"Biuro"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mManager Load (0.0ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mPosition Load (0.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mEmployee Update (0.4ms)[0m  [1m[33mUPDATE "employees" SET "department" = ?, "updated_at" = ? WHERE "employees"."id" = ?[0m  [["department", "Biuro"], ["updated_at", "2023-01-10 10:08:11.076683"], ["id", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+Completed 200 OK in 36ms (Views: 0.3ms | ActiveRecord: 2.7ms | Allocations: 5402)
+
+
+Started GET "/v1/employees" for 127.0.0.1 at 2023-01-10 11:08:16 +0100
+Processing by V1::EmployeesController#index as JSON
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees"[0m
+  ↳ app/controllers/v1/employees_controller.rb:14:in `index'
+Completed 200 OK in 2ms (Views: 1.9ms | ActiveRecord: 0.1ms | Allocations: 958)
+
+
+Started PATCH "/v1/employees/1" for 127.0.0.1 at 2023-01-10 11:08:24 +0100
+Processing by V1::EmployeesController#update as JSON
+  Parameters: {"department"=>"Sklep", "id"=>"1", "employee"=>{"department"=>"Sklep"}}
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :employee. Context: { controller: V1::EmployeesController, action: update, request: #<ActionDispatch::Request:0x00007fe6a80247e8>, params: {"department"=>"Sklep", "controller"=>"v1/employees", "action"=>"update", "id"=>"1", "employee"=>{"department"=>"Sklep"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mPosition Load (0.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mEmployee Update (0.3ms)[0m  [1m[33mUPDATE "employees" SET "department" = ?, "updated_at" = ? WHERE "employees"."id" = ?[0m  [["department", "Sklep"], ["updated_at", "2023-01-10 10:08:24.039709"], ["id", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 2.3ms | Allocations: 5357)
+
+
+Started PATCH "/v1/employees/1" for 127.0.0.1 at 2023-01-10 11:08:25 +0100
+Processing by V1::EmployeesController#update as JSON
+  Parameters: {"department"=>"Sklep", "id"=>"1", "employee"=>{"department"=>"Sklep"}}
+  [1m[36mEmployee Load (0.2ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :employee. Context: { controller: V1::EmployeesController, action: update, request: #<ActionDispatch::Request:0x00007fe6a52e6e20>, params: {"department"=>"Sklep", "controller"=>"v1/employees", "action"=>"update", "id"=>"1", "employee"=>{"department"=>"Sklep"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mManager Load (0.0ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mPosition Load (0.0ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:51:in `update'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 4746)
+
+
+Started POST "/v1/employees" for 127.0.0.1 at 2023-01-10 11:08:29 +0100
+Processing by V1::EmployeesController#create as JSON
+  Parameters: {"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "employee"=>{"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :employee. Context: { controller: V1::EmployeesController, action: create, request: #<ActionDispatch::Request:0x00007fe6a5ad7120>, params: {"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1, "controller"=>"v1/employees", "action"=>"create", "employee"=>{"user_id"=>5, "department"=>"Sklep", "manager_id"=>1, "position_id"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mPosition Load (0.1ms)[0m  [1m[34mSELECT "positions".* FROM "positions" WHERE "positions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mEmployee Create (0.5ms)[0m  [1m[32mINSERT INTO "employees" ("user_id", "department", "manager_id", "position_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["user_id", 5], ["department", "Sklep"], ["manager_id", 1], ["position_id", 1], ["created_at", "2023-01-10 10:08:29.618611"], ["updated_at", "2023-01-10 10:08:29.618611"]]
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:36:in `create'
+Completed 201 Created in 13ms (Views: 0.3ms | ActiveRecord: 2.4ms | Allocations: 4828)
+
+
+Started GET "/v1/employees" for 127.0.0.1 at 2023-01-10 11:08:37 +0100
+Processing by V1::EmployeesController#index as JSON
+  [1m[36mEmployee Load (0.2ms)[0m  [1m[34mSELECT "employees".* FROM "employees"[0m
+  ↳ app/controllers/v1/employees_controller.rb:14:in `index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms | Allocations: 1075)
+
+
+Started DELETE "/v1/employees/4" for 127.0.0.1 at 2023-01-10 11:09:08 +0100
+Processing by V1::EmployeesController#destroy as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/v1/employees_controller.rb:73:in `set_employee'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:66:in `destroy'
+  [1m[36mEmployee Destroy (1.6ms)[0m  [1m[31mDELETE FROM "employees" WHERE "employees"."id" = ?[0m  [["id", 4]]
+  ↳ app/controllers/v1/employees_controller.rb:66:in `destroy'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/employees_controller.rb:66:in `destroy'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 3.3ms | Allocations: 2383)
+
+
+Started GET "/v1/employees" for 127.0.0.1 at 2023-01-10 11:09:11 +0100
+Processing by V1::EmployeesController#index as JSON
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees"[0m
+  ↳ app/controllers/v1/employees_controller.rb:14:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 958)
+
+
+Started POST "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:10:16 +0100
+Processing by V1::VacationsController#create as JSON
+  Parameters: {"employee_id"=>1, "start_date"=>"2023-01-10", "end_date"=>"2023-01-10", "vacation_type"=>"Płatny", "decision"=>1, "vacation"=>{"employee_id"=>1, "start_date"=>"2023-01-10", "end_date"=>"2023-01-10", "vacation_type"=>"Płatny", "decision"=>1}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :vacation. Context: { controller: V1::VacationsController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa3d5c50>, params: {"employee_id"=>1, "start_date"=>"2023-01-10", "end_date"=>"2023-01-10", "vacation_type"=>"Płatny", "decision"=>1, "controller"=>"v1/vacations", "action"=>"create", "vacation"=>{"employee_id"=>1, "start_date"=>"2023-01-10", "end_date"=>"2023-01-10", "vacation_type"=>"Płatny", "decision"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mVacation Create (0.5ms)[0m  [1m[32mINSERT INTO "vacations" ("employee_id", "start_date", "end_date", "vacation_type", "decision", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["start_date", "2023-01-10"], ["end_date", "2023-01-10"], ["vacation_type", "Płatny"], ["decision", 1], ["created_at", "2023-01-10 10:10:16.928615"], ["updated_at", "2023-01-10 10:10:16.928615"]]
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+Completed 201 Created in 26ms (Views: 0.4ms | ActiveRecord: 3.1ms | Allocations: 20019)
+
+
+Started POST "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:10:30 +0100
+Processing by V1::VacationsController#create as JSON
+  Parameters: {"employee_id"=>1, "start_date"=>"2023-01-15", "end_date"=>"2023-01-15", "vacation_type"=>"Płatny", "decision"=>1, "vacation"=>{"employee_id"=>1, "start_date"=>"2023-01-15", "end_date"=>"2023-01-15", "vacation_type"=>"Płatny", "decision"=>1}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :vacation. Context: { controller: V1::VacationsController, action: create, request: #<ActionDispatch::Request:0x00007fe6aa629628>, params: {"employee_id"=>1, "start_date"=>"2023-01-15", "end_date"=>"2023-01-15", "vacation_type"=>"Płatny", "decision"=>1, "controller"=>"v1/vacations", "action"=>"create", "vacation"=>{"employee_id"=>1, "start_date"=>"2023-01-15", "end_date"=>"2023-01-15", "vacation_type"=>"Płatny", "decision"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mVacation Create (0.5ms)[0m  [1m[32mINSERT INTO "vacations" ("employee_id", "start_date", "end_date", "vacation_type", "decision", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["start_date", "2023-01-15"], ["end_date", "2023-01-15"], ["vacation_type", "Płatny"], ["decision", 1], ["created_at", "2023-01-10 10:10:30.047756"], ["updated_at", "2023-01-10 10:10:30.047756"]]
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+Completed 201 Created in 8ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 3349)
+
+
+Started POST "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:10:37 +0100
+Processing by V1::VacationsController#create as JSON
+  Parameters: {"employee_id"=>1, "start_date"=>"2023-01-20", "end_date"=>"2023-01-21", "vacation_type"=>"Płatny", "decision"=>1, "vacation"=>{"employee_id"=>1, "start_date"=>"2023-01-20", "end_date"=>"2023-01-21", "vacation_type"=>"Płatny", "decision"=>1}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :vacation. Context: { controller: V1::VacationsController, action: create, request: #<ActionDispatch::Request:0x00007fe6aac68ae8>, params: {"employee_id"=>1, "start_date"=>"2023-01-20", "end_date"=>"2023-01-21", "vacation_type"=>"Płatny", "decision"=>1, "controller"=>"v1/vacations", "action"=>"create", "vacation"=>{"employee_id"=>1, "start_date"=>"2023-01-20", "end_date"=>"2023-01-21", "vacation_type"=>"Płatny", "decision"=>1}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mVacation Create (0.5ms)[0m  [1m[32mINSERT INTO "vacations" ("employee_id", "start_date", "end_date", "vacation_type", "decision", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["start_date", "2023-01-20"], ["end_date", "2023-01-21"], ["vacation_type", "Płatny"], ["decision", 1], ["created_at", "2023-01-10 10:10:37.082798"], ["updated_at", "2023-01-10 10:10:37.082798"]]
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:39:in `create'
+Completed 201 Created in 9ms (Views: 0.3ms | ActiveRecord: 2.1ms | Allocations: 3350)
+
+
+Started GET "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:11:52 +0100
+Processing by V1::VacationsController#index as JSON
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations"[0m
+  ↳ app/controllers/v1/vacations_controller.rb:15:in `index'
+Completed 200 OK in 10ms (Views: 6.6ms | ActiveRecord: 1.2ms | Allocations: 5402)
+
+
+Started GET "/v1/vacations/1" for 127.0.0.1 at 2023-01-10 11:12:12 +0100
+Processing by V1::VacationsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mVacation Load (0.2ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:77:in `set_vacation'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 1243)
+
+
+Started GET "/v1/vacations/2" for 127.0.0.1 at 2023-01-10 11:12:15 +0100
+Processing by V1::VacationsController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:77:in `set_vacation'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 633)
+
+
+Started GET "/v1/vacations/3" for 127.0.0.1 at 2023-01-10 11:12:16 +0100
+Processing by V1::VacationsController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:77:in `set_vacation'
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.1ms | Allocations: 633)
+
+
+Started DELETE "/v1/vacations/3" for 127.0.0.1 at 2023-01-10 11:12:23 +0100
+Processing by V1::VacationsController#destroy as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mVacation Load (0.3ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:77:in `set_vacation'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms | Allocations: 942)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:8:in `authenticate_request'
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:12:28 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 219ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 6985)
+
+
+Started DELETE "/v1/vacations/3" for 127.0.0.1 at 2023-01-10 11:12:36 +0100
+Processing by V1::VacationsController#destroy as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mVacation Load (0.2ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:77:in `set_vacation'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:70:in `destroy'
+  [1m[36mVacation Destroy (0.7ms)[0m  [1m[31mDELETE FROM "vacations" WHERE "vacations"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/v1/vacations_controller.rb:70:in `destroy'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:70:in `destroy'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 3.1ms | Allocations: 2981)
+
+
+Started GET "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:12:40 +0100
+Processing by V1::VacationsController#index as JSON
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations"[0m
+  ↳ app/controllers/v1/vacations_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms | Allocations: 904)
+
+
+Started GET "/v1/vacations/3" for 127.0.0.1 at 2023-01-10 11:12:55 +0100
+Processing by V1::VacationsController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:76:in `set_vacation'
+Completed 404 Not Found in 8ms (ActiveRecord: 1.0ms | Allocations: 3813)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Vacation with 'id'=3):
+  
+app/controllers/v1/vacations_controller.rb:76:in `set_vacation'
+Started GET "/v1/vacations/2" for 127.0.0.1 at 2023-01-10 11:12:58 +0100
+Processing by V1::VacationsController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mVacation Load (0.2ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:76:in `set_vacation'
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 2486)
+
+
+Started PATCH "/v1/vacations/2" for 127.0.0.1 at 2023-01-10 11:13:38 +0100
+Processing by V1::VacationsController#update as JSON
+  Parameters: {"decision"=>0, "id"=>"2", "vacation"=>{"decision"=>0}}
+  [1m[36mVacation Load (0.2ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:76:in `set_vacation'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :vacation. Context: { controller: V1::VacationsController, action: update, request: #<ActionDispatch::Request:0x00007fe6aafdf820>, params: {"decision"=>0, "controller"=>"v1/vacations", "action"=>"update", "id"=>"2", "vacation"=>{"decision"=>0}} }[0m
+Completed 422 Unprocessable Entity in 47ms (Views: 5.9ms | ActiveRecord: 1.1ms | Allocations: 18714)
+
+
+Started PATCH "/v1/vacations/2" for 127.0.0.1 at 2023-01-10 11:14:21 +0100
+Processing by V1::VacationsController#update as JSON
+  Parameters: {"employee_id"=>1, "decision"=>0, "id"=>"2", "vacation"=>{"employee_id"=>1, "decision"=>0}}
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:76:in `set_vacation'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :vacation. Context: { controller: V1::VacationsController, action: update, request: #<ActionDispatch::Request:0x00007fe6a70d2a10>, params: {"employee_id"=>1, "decision"=>0, "controller"=>"v1/vacations", "action"=>"update", "id"=>"2", "vacation"=>{"employee_id"=>1, "decision"=>0}} }[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:54:in `update'
+  [1m[36mEmployee Load (0.7ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:54:in `update'
+  [1m[36mVacation Create (0.5ms)[0m  [1m[32mINSERT INTO "vacations" ("employee_id", "start_date", "end_date", "vacation_type", "decision", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["start_date", nil], ["end_date", nil], ["vacation_type", nil], ["decision", 0], ["created_at", "2023-01-10 10:14:21.335836"], ["updated_at", "2023-01-10 10:14:21.335836"]]
+  ↳ app/controllers/v1/vacations_controller.rb:54:in `update'
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:54:in `update'
+Completed 201 Created in 17ms (Views: 0.5ms | ActiveRecord: 4.1ms | Allocations: 7196)
+
+
+Started GET "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:15:06 +0100
+Processing by V1::VacationsController#index as JSON
+  [1m[36mVacation Load (0.2ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations"[0m
+  ↳ app/controllers/v1/vacations_controller.rb:15:in `index'
+Completed 200 OK in 9ms (Views: 5.6ms | ActiveRecord: 0.9ms | Allocations: 5371)
+
+
+Started DELETE "/v1/vacations/4" for 127.0.0.1 at 2023-01-10 11:15:13 +0100
+Processing by V1::VacationsController#destroy as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mVacation Load (0.4ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:75:in `set_vacation'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:68:in `destroy'
+  [1m[36mVacation Destroy (0.4ms)[0m  [1m[31mDELETE FROM "vacations" WHERE "vacations"."id" = ?[0m  [["id", 4]]
+  ↳ app/controllers/v1/vacations_controller.rb:68:in `destroy'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:68:in `destroy'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 2.8ms | Allocations: 9476)
+
+
+Started GET "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:15:17 +0100
+Processing by V1::VacationsController#index as JSON
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations"[0m
+  ↳ app/controllers/v1/vacations_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 905)
+
+
+Started PATCH "/v1/vacations/2" for 127.0.0.1 at 2023-01-10 11:15:24 +0100
+Processing by V1::VacationsController#update as JSON
+  Parameters: {"employee_id"=>1, "decision"=>0, "id"=>"2", "vacation"=>{"employee_id"=>1, "decision"=>0}}
+  [1m[36mVacation Load (0.1ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations" WHERE "vacations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:75:in `set_vacation'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :vacation. Context: { controller: V1::VacationsController, action: update, request: #<ActionDispatch::Request:0x00007fe6aca4ad90>, params: {"employee_id"=>1, "decision"=>0, "controller"=>"v1/vacations", "action"=>"update", "id"=>"2", "vacation"=>{"employee_id"=>1, "decision"=>0}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:53:in `update'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/vacations_controller.rb:53:in `update'
+  [1m[36mVacation Update (0.4ms)[0m  [1m[33mUPDATE "vacations" SET "decision" = ?, "updated_at" = ? WHERE "vacations"."id" = ?[0m  [["decision", 0], ["updated_at", "2023-01-10 10:15:24.260249"], ["id", 2]]
+  ↳ app/controllers/v1/vacations_controller.rb:53:in `update'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/vacations_controller.rb:53:in `update'
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 2.6ms | Allocations: 13274)
+
+
+Started GET "/v1/vacations" for 127.0.0.1 at 2023-01-10 11:15:28 +0100
+Processing by V1::VacationsController#index as JSON
+  [1m[36mVacation Load (0.2ms)[0m  [1m[34mSELECT "vacations".* FROM "vacations"[0m
+  ↳ app/controllers/v1/vacations_controller.rb:15:in `index'
+Completed 200 OK in 9ms (Views: 8.8ms | ActiveRecord: 0.2ms | Allocations: 906)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:16:14 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 214ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1000)
+
+
+Started GET "/v1/registers" for 127.0.0.1 at 2023-01-10 11:16:42 +0100
+Processing by V1::RegistersController#index as JSON
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers"[0m
+  ↳ app/controllers/v1/registers_controller.rb:15:in `index'
+Completed 200 OK in 9ms (Views: 2.6ms | ActiveRecord: 0.6ms | Allocations: 2669)
+
+
+Started GET "/v1/registers" for 127.0.0.1 at 2023-01-10 11:18:02 +0100
+Processing by V1::RegistersController#index as JSON
+  [1m[36mRegister Load (0.5ms)[0m  [1m[34mSELECT "registers".* FROM "registers"[0m
+  ↳ app/controllers/v1/registers_controller.rb:15:in `index'
+Completed 200 OK in 10ms (Views: 6.2ms | ActiveRecord: 0.5ms | Allocations: 605)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:18:44 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+Completed 200 OK in 230ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 7053)
+
+
+Started POST "/v1/registers" for 127.0.0.1 at 2023-01-10 11:18:52 +0100
+Error occurred while parsing request parameters.
+Contents:
+
+{
+"employee_id":1,
+"gate":1,
+"date_in":"2023-01-10",
+"time_in":"2023-01-10 07:00:00 UTC",
+"date_out":"2023-01-10",
+"time_out":"2023-01-10 15:00:00 UTC",
+}
+Processing by V1::RegistersController#create as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+Completed 400 Bad Request in 4ms (ActiveRecord: 0.2ms | Allocations: 1686)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+app/controllers/v1/registers_controller.rb:79:in `register_params'
+app/controllers/v1/registers_controller.rb:36:in `create'
+Started POST "/v1/registers" for 127.0.0.1 at 2023-01-10 11:20:18 +0100
+Processing by V1::RegistersController#create as JSON
+  Parameters: {"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-10", "time_in"=>"2023-01-10 07:00:00 UTC", "date_out"=>"2023-01-10", "time_out"=>"2023-01-10 15:00:00 UTC", "register"=>{"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-10", "time_in"=>"2023-01-10 07:00:00 UTC", "date_out"=>"2023-01-10", "time_out"=>"2023-01-10 15:00:00 UTC"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :register. Context: { controller: V1::RegistersController, action: create, request: #<ActionDispatch::Request:0x00007fe6ac20af68>, params: {"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-10", "time_in"=>"2023-01-10 07:00:00 UTC", "date_out"=>"2023-01-10", "time_out"=>"2023-01-10 15:00:00 UTC", "controller"=>"v1/registers", "action"=>"create", "register"=>{"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-10", "time_in"=>"2023-01-10 07:00:00 UTC", "date_out"=>"2023-01-10", "time_out"=>"2023-01-10 15:00:00 UTC"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mEmployee Load (0.7ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mRegister Create (0.7ms)[0m  [1m[32mINSERT INTO "registers" ("employee_id", "gate", "date_in", "time_in", "date_out", "time_out", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["gate", 1], ["date_in", "2023-01-10"], ["time_in", "2000-01-01 07:00:00"], ["date_out", "2023-01-10"], ["time_out", "2000-01-01 15:00:00"], ["created_at", "2023-01-10 10:20:18.678495"], ["updated_at", "2023-01-10 10:20:18.678495"]]
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+Completed 201 Created in 61ms (Views: 0.7ms | ActiveRecord: 3.8ms | Allocations: 31534)
+
+
+Started POST "/v1/registers" for 127.0.0.1 at 2023-01-10 11:20:26 +0100
+Processing by V1::RegistersController#create as JSON
+  Parameters: {"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-11", "time_in"=>"2023-01-11 07:00:00 UTC", "date_out"=>"2023-01-11", "time_out"=>"2023-01-11 15:00:00 UTC", "register"=>{"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-11", "time_in"=>"2023-01-11 07:00:00 UTC", "date_out"=>"2023-01-11", "time_out"=>"2023-01-11 15:00:00 UTC"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :register. Context: { controller: V1::RegistersController, action: create, request: #<ActionDispatch::Request:0x00007fe6ad0cfe68>, params: {"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-11", "time_in"=>"2023-01-11 07:00:00 UTC", "date_out"=>"2023-01-11", "time_out"=>"2023-01-11 15:00:00 UTC", "controller"=>"v1/registers", "action"=>"create", "register"=>{"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-11", "time_in"=>"2023-01-11 07:00:00 UTC", "date_out"=>"2023-01-11", "time_out"=>"2023-01-11 15:00:00 UTC"}} }[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mRegister Create (0.6ms)[0m  [1m[32mINSERT INTO "registers" ("employee_id", "gate", "date_in", "time_in", "date_out", "time_out", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["gate", 1], ["date_in", "2023-01-11"], ["time_in", "2000-01-01 07:00:00"], ["date_out", "2023-01-11"], ["time_out", "2000-01-01 15:00:00"], ["created_at", "2023-01-10 10:20:26.777272"], ["updated_at", "2023-01-10 10:20:26.777272"]]
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+Completed 201 Created in 11ms (Views: 0.3ms | ActiveRecord: 2.1ms | Allocations: 3600)
+
+
+Started POST "/v1/registers" for 127.0.0.1 at 2023-01-10 11:20:34 +0100
+Processing by V1::RegistersController#create as JSON
+  Parameters: {"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-12", "time_in"=>"2023-01-12 07:00:00 UTC", "date_out"=>"2023-01-12", "time_out"=>"2023-01-12 15:00:00 UTC", "register"=>{"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-12", "time_in"=>"2023-01-12 07:00:00 UTC", "date_out"=>"2023-01-12", "time_out"=>"2023-01-12 15:00:00 UTC"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameter: :register. Context: { controller: V1::RegistersController, action: create, request: #<ActionDispatch::Request:0x00007fe6ac3d9880>, params: {"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-12", "time_in"=>"2023-01-12 07:00:00 UTC", "date_out"=>"2023-01-12", "time_out"=>"2023-01-12 15:00:00 UTC", "controller"=>"v1/registers", "action"=>"create", "register"=>{"employee_id"=>1, "gate"=>1, "date_in"=>"2023-01-12", "time_in"=>"2023-01-12 07:00:00 UTC", "date_out"=>"2023-01-12", "time_out"=>"2023-01-12 15:00:00 UTC"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mRegister Create (0.5ms)[0m  [1m[32mINSERT INTO "registers" ("employee_id", "gate", "date_in", "time_in", "date_out", "time_out", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)[0m  [["employee_id", 1], ["gate", 1], ["date_in", "2023-01-12"], ["time_in", "2000-01-01 07:00:00"], ["date_out", "2023-01-12"], ["time_out", "2000-01-01 15:00:00"], ["created_at", "2023-01-10 10:20:34.556553"], ["updated_at", "2023-01-10 10:20:34.556553"]]
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:37:in `create'
+Completed 201 Created in 9ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 3597)
+
+
+Started GET "/v1/registers" for 127.0.0.1 at 2023-01-10 11:20:45 +0100
+Processing by V1::RegistersController#index as JSON
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers"[0m
+  ↳ app/controllers/v1/registers_controller.rb:15:in `index'
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.1ms | Allocations: 1251)
+
+
+Started GET "/v1/registers/1" for 127.0.0.1 at 2023-01-10 11:20:56 +0100
+Processing by V1::RegistersController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mRegister Load (0.2ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 1296)
+
+
+Started GET "/v1/registers/2" for 127.0.0.1 at 2023-01-10 11:20:58 +0100
+Processing by V1::RegistersController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 691)
+
+
+Started GET "/v1/registers/32" for 127.0.0.1 at 2023-01-10 11:20:59 +0100
+Processing by V1::RegistersController#show as JSON
+  Parameters: {"id"=>"32"}
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 32], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.1ms | Allocations: 825)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Register with 'id'=32):
+  
+app/controllers/v1/registers_controller.rb:75:in `set_register'
+Started GET "/v1/registers/3" for 127.0.0.1 at 2023-01-10 11:21:02 +0100
+Processing by V1::RegistersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+Completed 200 OK in 2ms (Views: 1.0ms | ActiveRecord: 0.1ms | Allocations: 690)
+
+
+Started GET "/v1/registers/4" for 127.0.0.1 at 2023-01-10 11:21:05 +0100
+Processing by V1::RegistersController#show as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.1ms | Allocations: 823)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Register with 'id'=4):
+  
+app/controllers/v1/registers_controller.rb:75:in `set_register'
+Started GET "/v1/registers/3" for 127.0.0.1 at 2023-01-10 11:21:06 +0100
+Processing by V1::RegistersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.1ms | Allocations: 690)
+
+
+Started PATCH "/v1/registers/3" for 127.0.0.1 at 2023-01-10 11:21:53 +0100
+Processing by V1::RegistersController#update as JSON
+  Parameters: {"date_out"=>"2023-01-12", "time_out"=>"2023-01-12 17:00:00 UTC", "id"=>"3", "register"=>{"date_out"=>"2023-01-12", "time_out"=>"2023-01-12 17:00:00 UTC"}}
+  [1m[36mRegister Load (0.2ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+[31mUnpermitted parameters: :id, :register. Context: { controller: V1::RegistersController, action: update, request: #<ActionDispatch::Request:0x00007fe6ac4200f0>, params: {"date_out"=>"2023-01-12", "time_out"=>"2023-01-12 17:00:00 UTC", "controller"=>"v1/registers", "action"=>"update", "id"=>"3", "register"=>{"date_out"=>"2023-01-12", "time_out"=>"2023-01-12 17:00:00 UTC"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:53:in `update'
+  [1m[36mEmployee Load (0.1ms)[0m  [1m[34mSELECT "employees".* FROM "employees" WHERE "employees"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:53:in `update'
+  [1m[36mRegister Update (1.1ms)[0m  [1m[33mUPDATE "registers" SET "time_out" = ?, "updated_at" = ? WHERE "registers"."id" = ?[0m  [["time_out", "2000-01-01 17:00:00"], ["updated_at", "2023-01-10 10:21:53.117898"], ["id", 3]]
+  ↳ app/controllers/v1/registers_controller.rb:53:in `update'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:53:in `update'
+Completed 200 OK in 16ms (Views: 0.7ms | ActiveRecord: 4.4ms | Allocations: 4043)
+
+
+Started GET "/v1/registers" for 127.0.0.1 at 2023-01-10 11:22:28 +0100
+Processing by V1::RegistersController#index as JSON
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers"[0m
+  ↳ app/controllers/v1/registers_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 2.0ms | ActiveRecord: 0.1ms | Allocations: 1225)
+
+
+Started DELETE "/v1/registers/3" for 127.0.0.1 at 2023-01-10 11:22:40 +0100
+Processing by V1::RegistersController#destroy as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers" WHERE "registers"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/v1/registers_controller.rb:75:in `set_register'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9:in `authenticate_request'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:68:in `destroy'
+  [1m[36mRegister Destroy (0.7ms)[0m  [1m[31mDELETE FROM "registers" WHERE "registers"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/v1/registers_controller.rb:68:in `destroy'
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/v1/registers_controller.rb:68:in `destroy'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 3.2ms | Allocations: 2388)
+
+
+Started GET "/v1/registers" for 127.0.0.1 at 2023-01-10 11:22:45 +0100
+Processing by V1::RegistersController#index as JSON
+  [1m[36mRegister Load (0.1ms)[0m  [1m[34mSELECT "registers".* FROM "registers"[0m
+  ↳ app/controllers/v1/registers_controller.rb:15:in `index'
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms | Allocations: 1020)
+
+
+Started POST "/v1/users" for 127.0.0.1 at 2023-01-10 11:36:48 +0100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by V1::UsersController#create as JSON
+  Parameters: {"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345", "password"=>"[FILTERED]", "user"=>{"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345"}}
+[31mUnpermitted parameter: :user. Context: { controller: V1::UsersController, action: create, request: #<ActionDispatch::Request:0x00007faee806aec0>, params: {"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345", "password"=>"[FILTERED]", "controller"=>"v1/users", "action"=>"create", "user"=>{"login"=>"abc", "first_name"=>"abc", "last_name"=>"abc", "account_type"=>"abc", "email"=>"abc", "account_no"=>"pl01234567890123456789012345"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."account_no" = ? LIMIT ?[0m  [["account_no", "pl01234567890123456789012345"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/v1/users_controller.rb:37:in `create'
+Completed 422 Unprocessable Entity in 234ms (Views: 6.8ms | ActiveRecord: 1.9ms | Allocations: 25859)
+
+
+Started GET "/v1/users" for 127.0.0.1 at 2023-01-10 11:36:56 +0100
+Processing by V1::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/v1/users_controller.rb:15:in `index'
+Completed 200 OK in 11ms (Views: 10.7ms | ActiveRecord: 0.2ms | Allocations: 2223)
+
+
+Started GET "/v1/managers" for 127.0.0.1 at 2023-01-10 11:37:06 +0100
+Processing by V1::ManagersController#index as JSON
+  [1m[36mManager Load (0.5ms)[0m  [1m[34mSELECT "managers".* FROM "managers"[0m
+  ↳ app/controllers/v1/managers_controller.rb:15:in `index'
+Completed 200 OK in 14ms (Views: 6.8ms | ActiveRecord: 0.8ms | Allocations: 17517)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:37:14 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."user_id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:14:in `login'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1838)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:37:38 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."user_id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:14:in `login'
+Completed 200 OK in 231ms (Views: 0.2ms | ActiveRecord: 2.4ms | Allocations: 11299)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:39:05 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"login"=>"abc", "password"=>"[FILTERED]", "session"=>{"login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."user_id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:14:in `login'
+Completed 401 Unauthorized in 13ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 11007)
+
+
+Started POST "/v1/login" for 127.0.0.1 at 2023-01-10 11:39:17 +0100
+Processing by V1::SessionsController#login as JSON
+  Parameters: {"user_id"=>1, "login"=>"abc", "password"=>"[FILTERED]", "session"=>{"user_id"=>1, "login"=>"abc", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."login" = ? LIMIT ?[0m  [["login", "abc"], ["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:13:in `login'
+  [1m[36mManager Load (0.1ms)[0m  [1m[34mSELECT "managers".* FROM "managers" WHERE "managers"."user_id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/v1/sessions_controller.rb:14:in `login'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1077)
+
+

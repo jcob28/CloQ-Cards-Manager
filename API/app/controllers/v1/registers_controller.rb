@@ -1,14 +1,13 @@
 module V1
   class RegistersController < ApplicationController
     before_action :set_register, only: %i[ show edit update destroy ]
-    before_action :authenticate_request, only: %i[ index show create update destroy ]
+    before_action :authenticate_request, only: %i[ create update destroy ]
 
     swagger_controller :registers, 'Registers'
 
     # GET /registers
     swagger_api :index do
       summary 'Returns all registers\' details'
-      param :header, :Authorization, :string, :required, "Token"
     end
 
     def index
@@ -20,7 +19,6 @@ module V1
     swagger_api :show do
       summary 'Returns a register\'s details'
       param :path, :id, :integer, :required, "User ID"
-      param :header, :Authorization, :string, :required, "Token"
     end
 
     def show

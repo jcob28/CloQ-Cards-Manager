@@ -1,5 +1,6 @@
 module V1
   class UsersController < ApplicationController
+    before_action :set_user, only: %i[ show edit update destroy ]
     before_action :authenticate_request, only: %i[ update destroy ]
 
     swagger_controller :users, 'Users'
@@ -10,8 +11,8 @@ module V1
     end
 
     def index
-      users = User.all
-      render json: users, status: :ok
+      @users = User.all
+      render json: @users, status: :ok
     end
 
     # GET /users/1
@@ -21,8 +22,7 @@ module V1
     end
 
     def show
-      user = User.find(params[:id])
-      render json: user, status: :ok
+      render json: @user, status: :ok
     end
 
     # POST /users
@@ -50,12 +50,10 @@ module V1
     end
 
     def update
-      user = User.find(params[:id])
-
-      if user.update(user_params)
-        render json: user, status: :ok
+      if @user.update(user_params)
+        render json: @user, status: :ok
       else
-        render json: user.errors, status: :unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
     end
 
@@ -67,12 +65,15 @@ module V1
     end
 
     def destroy
-      user = User.find(params[:id])
-      user.destroy
+      @user.destroy
       render json: { "Status":"Deleted" }, status: :ok
     end
 
     private
+
+    def set_user
+      @user = User.find(params[:id])
+    end
 
     def user_params
       params.permit(:login, :first_name, :last_name, :account_type, :email, :account_no, :password, :password_confirmation)

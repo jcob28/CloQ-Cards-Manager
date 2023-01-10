@@ -26,13 +26,6 @@
               "type": "string",
               "description": "Request body",
               "required": true
-            },
-            {
-              "paramType": "header",
-              "name": "Authorization",
-              "type": "string",
-              "description": "Token",
-              "required": true
             }
           ],
           "nickname": "V1::Managers#create",

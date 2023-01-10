@@ -49,7 +49,7 @@ module V1
     end
     def update
       if @manager.update(manager_params)
-        render json: :show, status: :ok
+        render json: @manager, status: :ok
       else
         render json: @manager.errors, status: :unprocessable_entity
       end

@@ -9,15 +9,6 @@
       "operations": [
         {
           "summary": "Returns all registers' details",
-          "parameters": [
-            {
-              "paramType": "header",
-              "name": "Authorization",
-              "type": "string",
-              "description": "Token",
-              "required": true
-            }
-          ],
           "nickname": "V1::Registers#index",
           "method": "get"
         }
@@ -60,13 +51,6 @@
               "name": "id",
               "type": "integer",
               "description": "User ID",
-              "required": true
-            },
-            {
-              "paramType": "header",
-              "name": "Authorization",
-              "type": "string",
-              "description": "Token",
               "required": true
             }
           ],

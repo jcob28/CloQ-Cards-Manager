@@ -23,7 +23,7 @@ module V1
     end
 
     def show
-      @position = Position.find(params[:id])
+      render json: @position, status: :ok
     end
 
     # POST /positions
@@ -53,7 +53,7 @@ module V1
 
     def update
       if @position.update(position_params)
-        render json: :show, status: :ok
+        render json: @position, status: :ok
       else
         render json: @position.errors, status: :unprocessable_entity
       end
