@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "555ea22e-120e-4f03-885e-4977c84ef428",
+		"name": "Registers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25095633"
+	},
+	"item": [
+		{
+			"name": "Returns all registers' details",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/v1/registers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"registers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Returns an register's details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/v1/registers/:id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"registers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creates a register",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NzM2MzE5MDJ9.l7bL_y8zKrPXMpLM7LcYteuSHzKsW46xKbr36bXNIJY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{        \n    \"employee_id\": 1,\n    \"gate\": 1,\n    \"date_in\": \"2023-01-19\",\n    \"time_in\": \"2023-01-19 07:00:00 UTC\",\n    \"date_out\": \"2023-01-19\",\n    \"time_out\": \"2023-01-19 15:00:00 UTC\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/v1/registers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"registers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletes a register",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NzM2MzE5MDJ9.l7bL_y8zKrPXMpLM7LcYteuSHzKsW46xKbr36bXNIJY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/v1/registers/:id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"registers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updates a register's details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NzM2MzE5MDJ9.l7bL_y8zKrPXMpLM7LcYteuSHzKsW46xKbr36bXNIJY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{        \n    \"date_in\": \"2023-01-19\",\n    \"time_in\": \"2023-01-19 08:00:00 UTC\",\n    \"date_out\": \"2023-01-19\",\n    \"time_out\": \"2023-01-19 16:00:00 UTC\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/v1/registers/:id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"registers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
