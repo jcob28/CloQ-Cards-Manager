@@ -40,20 +40,20 @@ module V1
       end
     end
 
-    # PATCH/PUT /managers/1
-    swagger_api :update do
-      summary 'Updates the manager\'s details'
-      param :path, :id, :integer, :required, "User ID"
-      param :body, :body, :string, :required, "Request body"
-      param :header, :Authorization, :string, :required, "Token"
-    end
-    def update
-      if @manager.update(manager_params)
-        render json: @manager, status: :ok
-      else
-        render json: @manager.errors, status: :unprocessable_entity
-      end
-    end
+    # # PATCH/PUT /managers/1
+    # swagger_api :update do
+    #   summary 'Updates the manager\'s details'
+    #   param :path, :id, :integer, :required, "User ID"
+    #   param :body, :body, :string, :required, "Request body"
+    #   param :header, :Authorization, :string, :required, "Token"
+    # end
+    # def update
+    #   if @manager.update(manager_params)
+    #     render json: @manager, status: :ok
+    #   else
+    #     render json: @manager.errors, status: :unprocessable_entity
+    #   end
+    # end
 
     # DELETE /managers/1
     swagger_api :destroy do
