@@ -1,717 +1,950 @@
 FORMAT: 1A
-HOST: https://systemgenerowaniakartczasupracy.apiblueprint.org/
+HOST: http://127.0.0.1:3000/
 
 # WeWork
 
-It is an API of *WeWork* - System of generating employee's clockcards
+It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
-# Group Log-in-out
+# Group Sessions API
 
-## Log-in [/login/{?log,pass}]
+## Sessions [/login/{?login,password}]
+
++ Parameters
+    
+    + login: abc (string) - User's login to System
+    + password: password (string) - User's password to System
 
 ### Login [POST]
-+ Parameters
-    
-    + log: user1 (string) - User's login to System
-    + pass: pass1 (string) - User's password to System
-    
-+ Response 200 (application/json)
 
-        {
-            "Token": 1234567890,
-            "AccountType": "Employee"
-        }
-        
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-        
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-## Log-out [/logout]
-
-### Logout [DELETE]
-+ Response 200 (application/json)
-
-        {
-            "Message": "Logout: Done"
-        }
-        
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-# Group User API
-
-## User [/users/{?Login,Password,FirstName,LastName,AccountType,Email,AccountNo}]
-
-+ Parameters
-
-    + Login (string) - User's login
-    + Password (int) - User's password
-    + FirstName (string) - User's first name
-    + LastName (string) - User's last name
-    + AccountType (enum) - User's type of account
-    + Email (string) - User's e-mail address
-    + AccountNo (string) - User's login
-
-### Add New User [POST]
-+ Request
-
-        {
-            "Login": "jankow4822",
-            "Password": 4932
-            "FirstName": "Jan",
-            "LastName": "Kowalski",
-            "AccountType": "Employee",
-            "E-mail": "jankowalski@gmail.com",
-            "AccountNo": "PL11240000000000009999117429"
-        }
-        
-+ Response 201 (application/json)
-
-        {
-            "ID": 1,
-            "Login": "jankow4822",
-            "Password": 4932
-            "FirstName": "Jan",
-            "LastName": "Kowalski",
-            "AccountType": "Employee",
-            "E-mail": "jankowalski@gmail.com",
-            "AccountNo": "PL11240000000000009999117429"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-        
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-### Edit User [PUT]
-+ Request
-
-        {
-            "Login": "jankow4822",
-            "Password": 4932
-            "FirstName": "Janusz",
-            "LastName": "Kowalski",
-            "AccountType": "Employee",
-            "E-mail": "januszkowalski@gmail.com",
-            "AccountNo": "PL11240000000000009999117429"
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "ID": 1,
-            "Login": "jankow4822",
-            "Password": 4932
-            "FirstName": "Janusz",
-            "LastName": "Kowalski",
-            "AccountType": "Employee",
-            "E-mail": "januszkowalski@gmail.com",
-            "AccountNo": "PL11240000000000009999117429"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-        
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-### Delete User [DELETE]
-+ Request
-
-        {
-           "ID": 1
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "Login": "jankow4822",
-            "Password": 4932
-            "FirstName": "Janusz",
-            "LastName": "Kowalski",
-            "AccountType": "Employee",
-            "E-mail": "januszkowalski@gmail.com",
-            "AccountNo": "PL11240000000000009999117429"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-        
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### List All Users [GET]
-+ Response 200 (application/json)
-
-        {
-            "ID": 1,
-            "Login": "jankow4822",
-            "Password": 4932
-            "FirstName": "Jan",
-            "LastName": "Kowalski",
-            "AccountType": "Employee",
-            "E-mail": "jankowalski@gmail.com",
-            "AccountNo": "PL11240000000000009999117429"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-
-# Group Employee API
-
-## Employee [/employee/{?EmployeeID,Login,Department,ManagerID,PositionID}]
-
-+ Parameters
-
-    + EmployeeID (int) - Employee's ID
-    + Login (string) - Employee's login
-    + Department (string) - Employee's department
-    + ManagerID (int) - Employee's manager's ID
-    + PositionID (int) - Employee's position's ID
-
-### Add New Employee [POST]
-+ Request
-
-        {
-            "Login": "jankow4822",
-            "Department": "DepA",
-            "ManagerID": 101,
-            "PositionID": 53
-        }
-        
-+ Response 201 (application/json)
-
-        {
-            "EmployeeID": 10010422,
-            "Login": "jankow4822",
-            "Department": "DepA",
-            "ManagerID": 101,
-            "PositionID": 53
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-        
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-### Edit Employee [PUT]
-+ Request
-
-        {
-            "EmployeeID": 10010422,
-            "Login": "jankow4822",
-            "Department": "DepA",
-            "ManagerID": 101,
-            "PositionID": 53
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "EmployeeID": 10010422,  
-            "EmployeeID": 10010422,
-            "Login": "jankow4822",
-            "Department": "DepA",
-            "ManagerID": 101,
-            "PositionID": 53
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### Delete Employee [DELETE]
-+ Request
-
-        {
-            "EmployeeID": 10010422
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "Login": "jankow4822",
-            "Department": "DepA",
-            "ManagerID": 101,
-            "PositionID": 53
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### List All Employees [GET]
-+ Response 200 (application/json)
-
-    + Body
-
-            {    
-                [
-                    {
-                        "Message": "List of all employees: ",
-                        "employees": 
-                        [
-                            {
-                                "EmployeeID": 10010422,
-                                "Login": "jankow4822",
-                                "Department": "DepA",
-                                "ManagerID": 101,
-                                "PositionID": 53
-                            }, {
-                                "EmployeeID": 10010432,
-                                "Login": "jankow4822",
-                                "Department": "DepA",
-                                "ManagerID": 101,
-                                "PositionID": 53
-                            }, {
-                                "EmployeeID": 10010420,
-                                "Login": "jankow4822",
-                                "Department": "DepA",
-                                "ManagerID": 101,
-                                "PositionID": 53
-                            }, 
-                        ]
-                    }
-                ]
-            }
-            
-+ Response 400 ((application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-## Employee - me at day [/employee/meatday]
-
-### Read Employee at day [GET]
-+ Request
-    
-        {
-            "day": 25,
-            "month": 4,
-            "year": 2022
-        }
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {   
-                "Message" : "Arrives and departures at day"
-                "registers" :
-                [
-                    {
-                        "EmployeeID": 10010422,
-                        "TimeIn": 0801,
-                        "TimeOut": 0912
-                    }, {
-                        "EmployeeID": 10010422,
-                        "TimeIn": 1000,
-                        "TimeOut": 1400
-                    }, {
-                        "EmployeeID": 10010422,
-                        "TimeIn": 1430,
-                        "TimeOut": 1600
-                    }, 
-                ]
-            }
-            
-+ Response 400 ((application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-# Group Manager API
-
-## Manager [/managers/{?ManagerID,Login}]
-
-+ Parameters
-
-    + ManagerID (int) - Manager's ID
-    + Login (string) - Manager's login
-
-### Add New Manager [POST]
-+ Request
-
-        {
-            "Login": "man01"
-        }
-        
-+ Response 201 (application/json)
-
-        {
-            "ManagerID": 1,
-            "Login": "man01"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### Delete Manager [DELETE]
-+ Request
-
-        {
-            "ManagerID": 1
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "Meesage": "Delete: Done."
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-# Group Position API
-
-## Position [/positions/{?PositionID,PositionName,Salary}]
-
-+ Parameters
-
-    + PositionID (int) - Position's ID
-    + PositionName (string) - Position name's
-    + Salary (int) - Salary assigned to position
-
-### List All Positions [GET]
-+ Response 200 (application/json)
-
-        {
-        
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-
-# Group Gate API
-
-## Gate [/gates/{?GateID,Login}]
-
-+ Parameters
-
-    + GateID (int) - Gate's ID
-    + Login (string) - User's login
-
-
-# Group Register API
-
-## Register [/registers/{?RegisterID,EmployeeID,GateID,DateIn,TimeIn,DateOut,TimeOut}]
-
-+ Parameters
-
-    + RegisterID (int) - Register's ID
-    + EmployeeID (int) - Employee's ID
-    + GateID (int) - Gate's ID
-    + DateIn (date) - Start date of work
-    + TimeIn (time) - Start time of work
-    + DateOut (date) - End date of work
-    + TimeOut (time) - End time of work
-
-### Add New Register [POST]
-+ Request
-
-        {
-            "GateID": 1,
-            "DateIn": "2023-01-01",
-            "HourIn": "08:00",
-            "DateOut": "2023-01-01",
-            "HourOut": "16:00"
-        }
-        
-+ Response 201 (application/json)
-
-        {
-            "RegisterID": 1,
-            "GateID": 1,
-            "DateIn": "2023-01-01",
-            "HourIn": "08:00",
-            "DateOut": "2023-01-01",
-            "HourOut": "16:00"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### Read Register [GET]
-+ Response 200 (application/json)
-
-        {
-            
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### Delete Register [DELETE]
-+ Request
-
-        {
-            "RegisterID": 1,
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "GateID": 1,
-            "DateIn": "2023-01-01",
-            "HourIn": "08:00",
-            "DateOut": "2023-01-01",
-            "HourOut": "16:00"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### Update Register [PUT]
-+ Request
-
-        {
-            "GateID": 1,
-            "DateIn": "2023-01-01",
-            "HourIn": "08:00",
-            "DateOut": "2023-01-01",
-            "HourOut": "16:00"
-        }
-        
-+ Response 200 (application/json)
-
-        {
-            "RegisterID": 1,
-            "GateID": 1,
-            "DateIn": "2023-01-01",
-            "HourIn": "08:00",
-            "DateOut": "2023-01-01",
-            "HourOut": "16:00"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
- 
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-        
-
-# Group Leave API
-
-## Leave [/leaves/{?LeaveID,EmployeeID,DateStart,DateEnd,LeaveType,Decision}]
-
-+ Parameters
-
-    + LeaveID (int) - Leave's ID
-    + EmployeeID (int) - Employee's ID
-    + DateStart (date) - Start date of leave
-    + DateEnd (date) - End date of leave
-    + LeaveType (string) - Leave's type
-    + Decision (bool) - Manager's approval/refusal of leave
-
-### Add New Leave [POST]
-+ Request
-
-        {
-            "EmployeeID": 1,
-            "StartDate": "2.1.2023",
-            "EndDate": "3.1.2023",
-            "LeaveType": "sick",
-            "Acceptance": 1
-        }
-        
-+ Response 201 (application/json)
-
-        {
-            "LeaveID": 1,
-            "EmployeeID": 1,
-            "StartDate": "2.1.2023",
-            "EndDate": "3.1.2023",
-            "LeaveType": "sick",
-            "Acceptance": 1
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "Message": "Bad Request"
-        }
-
-+ Response 503 (application/json)
-
-        {
-            "Message": "Service Unavailable"
-        }
-
-### Update Leave [PUT]
 + Request 
 
         {
-            "LeaveID": 1,
-            "EmployeeID": 1,
-            "StartDate": "2.1.2023",
-            "EndDate": "3.1.2023",
-            "LeaveType": "sick",
-            "Acceptance": 1
+            "login" : "abc",
+            "password" : "password"
         }
 
 + Response 200 (application/json)
 
         {
-            "LeaveID": 1,
-            "EmployeeID": 1,
-            "StartDate": "2.1.2023",
-            "EndDate": "3.1.2023",
-            "LeaveType": "sick",
-            "Acceptance": 1
-        }
-
-+ Response 400 (text/plain)
-
-        {
-            "Message": "Bad Request"
+            "Token" : "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NzM2OTQ4MTh9._b8mW_JcB90p_yXtk1ZN_pbh7-l1JDfsXvLE9hZ7Q-Y"
         }
         
-+ Response 503 (application/json)
++ Response 401 (application/json)
 
         {
-            "Message": "Service Unavailable"
+            "Error" : "Incorrect login or password"
+        }
+        
+
+# Group Users API
+
+## All Users [/users]
+
+### Return all users' details [GET]
+
++ Response 200
+
+        [
+            {
+                "id": 1,
+                "login": "abc",
+                "first_name": "abc",
+                "last_name": "abc",
+                "account_type": "abc",
+                "email": "abc",
+                "account_no": "pl01234567890123456789012345",
+                "created_at": "2023-01-10T09:52:06.983Z",
+                "updated_at": "2023-01-10T09:52:06.983Z",
+                "password_digest": "$2a$12$kYcna18m3nsnnh2K5Q.w8uOxt4omvqGs.g3986jXjkVa94XzMZ7fm"
+            },
+            {
+                "id": 2,
+                "login": "def",
+                "first_name": "abc",
+                "last_name": "abc",
+                "account_type": "abc",
+                "email": "def",
+                "account_no": "pl11234567890123456789012345",
+                "created_at": "2023-01-10T09:52:20.514Z",
+                "updated_at": "2023-01-10T09:52:20.514Z",
+                "password_digest": "$2a$12$Qc0dX/060w.M2x6PxP4JuuRVUBc3GUHptQIOzmsHKJJSpRAu4ClWC"
+            }
+        ]
+        
+## An User [/users/{id}]
+        
+### Return an user's details [GET]
+
++ Parameters
+
+    + id: 1 (integer) - User's ID
+    
++ Response 200
+
+        {
+            "id": 1,
+            "login": "abc",
+            "first_name": "abc",
+            "last_name": "abc",
+            "account_type": "abc",
+            "email": "abc",
+            "account_no": "pl01234567890123456789012345",
+            "created_at": "2023-01-10T09:52:06.983Z",
+            "updated_at": "2023-01-10T09:52:06.983Z",
+            "password_digest": "$2a$12$kYcna18m3nsnnh2K5Q.w8uOxt4omvqGs.g3986jXjkVa94XzMZ7fm"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+
+### Creates an user [POST]
+
++ Request
+
+        {
+            "login": "yzz",
+            "password": "password",
+            "first_name": "Jan",
+            "last_name": "Kowalski",
+            "account_type": "Employee",
+            "email": "jankowalski@gmail.com",
+            "account_no": "PL11240000000000009999117429"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 12,
+            "login": "yzz",
+            "first_name": "Jan",
+            "last_name": "Kowalski",
+            "account_type": "Employee",
+            "email": "jankowalski@gmail.com",
+            "account_no": "PL11240000000000009999117429",
+            "created_at": "2023-01-14T11:15:56.988Z",
+            "updated_at": "2023-01-14T11:15:56.988Z",
+            "password_digest": "$2a$12$TiT8Dm/jRA911QhRL4mNq.cvxMoM.1/kTNE3xkNNCgZJ9GWv4ldHW"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+        
+### Edit an user [PUT]
+
++ Parameters
+
+    + id: 1 (integer) - User's ID
+
++ Request
+
+        {
+            "password": "password",
+            "first_name": "Kacper",
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "login": "yzz",
+            "first_name": "Kacper",
+            "last_name": "Kowalski",
+            "account_type": "Employee",
+            "email": "jankowalski@gmail.com",
+            "account_no": "PL11240000000000009999117429",
+            "created_at": "2023-01-14T11:15:56.988Z",
+            "updated_at": "2023-01-14T11:15:56.988Z",
+            "password_digest": "$2a$12$TiT8Dm/jRA911QhRL4mNq.cvxMoM.1/kTNE3xkNNCgZJ9GWv4ldHW"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }  
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }        
+        
+### Delete an user [DELETE]
+
++ Parameters
+
+    + id: 1 (integer) - User's ID
+
++ Response 200
+
+        {
+            "Message": "Deleted"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }   
+        
+# Group Employees API
+
+## All Employees [/employees]
+
+### Return all employees' details [GET]
+
++ Response 200
+
+        [
+            {
+                "id": 1,
+                "user_id": 3,
+                "department": "Sklep",
+                "manager_id": 1,
+                "position_id": 1,
+                "created_at": "2023-01-10T10:07:09.425Z",
+                "updated_at": "2023-01-10T10:08:24.039Z"
+            },
+            {
+                "id": 2,
+                "user_id": 4,
+                "department": "Sklep",
+                "manager_id": 1,
+                "position_id": 1,
+                "created_at": "2023-01-10T10:07:25.904Z",
+                "updated_at": "2023-01-10T10:07:25.904Z"
+            },
+            {
+                "id": 3,
+                "user_id": 5,
+                "department": "Sklep",
+                "manager_id": 1,
+                "position_id": 1,
+                "created_at": "2023-01-10T10:07:29.800Z",
+                "updated_at": "2023-01-10T10:07:29.800Z"
+            }
+        ]
+        
+## An Employee [/employees/{id}]
+        
+### Return an employee's details [GET]
+
++ Parameters
+
+    + id: 1 (integer) - Employee's ID
+    
++ Response 200
+
+        {
+            "id": 1,
+            "user_id": 3,
+            "department": "Sklep",
+            "manager_id": 1,
+            "position_id": 1,
+            "created_at": "2023-01-10T10:07:09.425Z",
+            "updated_at": "2023-01-10T10:08:24.039Z"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+
+### Creates an employee [POST]
+
++ Request
+
+        {
+            "user_id": 4,
+            "department": "Sklep",
+            "manager_id": 1,
+            "position_id": 1
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 2,
+            "user_id": 4,
+            "department": "Sklep",
+            "manager_id": 1,
+            "position_id": 1,
+            "created_at": "2023-01-10T10:07:25.904Z",
+            "updated_at": "2023-01-10T10:07:25.904Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+        
+### Edit an employee [PUT]
+
++ Parameters
+
+    + id: 3 (integer) - Employee's ID
+
++ Request
+
+        {
+            "department": "Biuro"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 3,
+            "user_id": 5,
+            "department": "Biuro",
+            "manager_id": 1,
+            "position_id": 1,
+            "created_at": "2023-01-10T10:07:29.800Z",
+            "updated_at": "2023-01-10T10:07:29.800Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }    
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }        
+        
+### Delete an employee [DELETE]
+
++ Parameters
+
+    + id: 1 (integer) - Employee's ID
+
++ Response 200
+
+        {
+            "Message": "Deleted"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }        
+        
+# Group Managers API
+
+## All Managers [/managers]
+
+### Return all managers' details [GET]
+
++ Response 200
+
+        [
+            {
+                "id": 1,
+                "user_id": 1,
+                "created_at": "2023-01-10T10:03:25.320Z",
+                "updated_at": "2023-01-10T10:03:25.320Z"
+            }
+        ]
+        
+## A Manager [/managers/{id}]
+        
+### Return a manager's details [GET]
+
++ Parameters
+
+    + id: 1 (integer) - Manager's ID
+    
++ Response 200
+
+        {
+            "id": 1,
+            "user_id": 1,
+            "created_at": "2023-01-10T10:03:25.320Z",
+            "updated_at": "2023-01-10T10:03:25.320Z"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+
+### Creates a manager [POST]
+
++ Request
+
+        {
+            "user_id": 8
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 4,
+            "user_id": 8,
+            "created_at": "2023-01-14T11:53:20.752Z",
+            "updated_at": "2023-01-14T11:53:20.752Z"
+        }
+        
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }          
+        
+### Delete a manager [DELETE]
+
++ Parameters
+
+    + id: 8 (integer) - Manager's ID
+
++ Response 200
+
+        {
+            "Message": "Deleted"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }   
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }        
+
+# Group Positions API
+
+## All Positions [/positions]
+
+### Return all positions' details [GET]
+
++ Response 200
+
+        [
+            {
+                "id": 1,
+                "position_name": "Pracownik",
+                "salary": 3500,
+                "created_at": "2023-01-10T09:57:15.948Z",
+                "updated_at": "2023-01-10T09:57:15.948Z"
+            },
+            {
+                "id": 2,
+                "position_name": "Kierownik",
+                "salary": 7500,
+                "created_at": "2023-01-10T09:57:31.188Z",
+                "updated_at": "2023-01-10T09:57:31.188Z"
+            },
+            {
+                "id": 3,
+                "position_name": "Z-ca kierownika",
+                "salary": 6000,
+                "created_at": "2023-01-10T09:57:52.261Z",
+                "updated_at": "2023-01-10T09:57:52.261Z"
+            },
+            {
+                "id": 4,
+                "position_name": "Dyrektor",
+                "salary": 11000,
+                "created_at": "2023-01-10T09:58:14.551Z",
+                "updated_at": "2023-01-10T09:58:14.551Z"
+            },
+            {
+                "id": 5,
+                "position_name": "Prezes",
+                "salary": 30000,
+                "created_at": "2023-01-10T09:58:25.383Z",
+                "updated_at": "2023-01-10T10:02:43.382Z"
+            },
+            {
+                "id": 7,
+                "position_name": "Praktykant",
+                "salary": 3450,
+                "created_at": "2023-01-13T17:11:08.391Z",
+                "updated_at": "2023-01-13T17:11:08.391Z"
+            }
+        ]
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }            
+        
+## A Position [/positions/{id}]
+        
+### Return a position's details [GET]
+
++ Parameters
+
+    + id: 5 (integer) - Position's ID
+    
++ Response 200
+
+        {
+            "id": 5,
+            "position_name": "Prezes",
+            "salary": 30000,
+            "created_at": "2023-01-10T09:58:25.383Z",
+            "updated_at": "2023-01-10T10:02:43.382Z"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }           
+
+### Creates a position [POST]
+
++ Request
+
+        {
+            "position_name":"Stażysta",
+            "salary":3450
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 8,
+            "position_name": "Stażysta",
+            "salary": 3450,
+            "created_at": "2023-01-14T11:59:16.491Z",
+            "updated_at": "2023-01-14T11:59:16.491Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }  
+        
+### Edit a position [PUT]
+
++ Parameters
+
+    + id: 8 (integer) - Position's ID
+
++ Request
+
+        {
+            "salary":3500
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "salary": 3500,
+            "id": 8,
+            "position_name": "Stażysta",
+            "created_at": "2023-01-14T11:59:16.491Z",
+            "updated_at": "2023-01-14T12:00:49.706Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }   
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }        
+        
+### Delete a position [DELETE]
+
++ Parameters
+
+    + id: 8 (integer) - Position's ID
+
++ Response 200
+
+        {
+            "Message": "Deleted"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }  
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }        
+
+# Group Registers API
+
+## All Registers [/registers]
+
+### Return all registers' details [GET]
+
++ Response 200
+
+        [
+            {
+                "id": 1,
+                "employee_id": 1,
+                "gate": 1,
+                "date_in": "2023-01-10",
+                "time_in": "2000-01-01T07:00:00.000Z",
+                "date_out": "2023-01-10",
+                "time_out": "2000-01-01T15:00:00.000Z",
+                "created_at": "2023-01-10T10:20:18.678Z",
+                "updated_at": "2023-01-10T10:20:18.678Z"
+            },
+            {
+                "id": 2,
+                "employee_id": 1,
+                "gate": 1,
+                "date_in": "2023-01-11",
+                "time_in": "2000-01-01T07:00:00.000Z",
+                "date_out": "2023-01-11",
+                "time_out": "2000-01-01T15:00:00.000Z",
+                "created_at": "2023-01-10T10:20:26.777Z",
+                "updated_at": "2023-01-10T10:20:26.777Z"
+            },
+            {
+                "id": 4,
+                "employee_id": 1,
+                "gate": 1,
+                "date_in": "2023-01-18",
+                "time_in": "2000-01-01T07:00:00.000Z",
+                "date_out": "2023-01-18",
+                "time_out": "2000-01-01T15:00:00.000Z",
+                "created_at": "2023-01-13T17:32:37.708Z",
+                "updated_at": "2023-01-13T17:32:37.708Z"
+            }
+        ]
+        
+## A Register [/registers/{id}]
+        
+### Return a register's details [GET]
+
++ Parameters
+
+    + id: 1 (integer) - Register's ID
+    
++ Response 200
+
+        {
+            "id": 1,
+            "employee_id": 1,
+            "gate": 1,
+            "date_in": "2023-01-10",
+            "time_in": "2000-01-01T07:00:00.000Z",
+            "date_out": "2023-01-10",
+            "time_out": "2000-01-01T15:00:00.000Z",
+            "created_at": "2023-01-10T10:20:18.678Z",
+            "updated_at": "2023-01-10T10:20:18.678Z"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+
+### Creates a register [POST]
+
++ Request
+
+        {        
+            "employee_id": 1,
+            "gate": 1,
+            "date_in": "2023-01-20",
+            "time_in": "2023-01-20 07:00:00 UTC",
+            "date_out": "2023-01-20",
+            "time_out": "2023-01-20 15:00:00 UTC"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 6,
+            "employee_id": 1,
+            "gate": 1,
+            "date_in": "2023-01-20",
+            "time_in": "2000-01-01T07:00:00.000Z",
+            "date_out": "2023-01-20",
+            "time_out": "2000-01-01T15:00:00.000Z",
+            "created_at": "2023-01-14T12:05:58.308Z",
+            "updated_at": "2023-01-14T12:05:58.308Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+        
+### Edit a register [PUT]
+
++ Parameters
+
+    + id: 6 (integer) - Register's ID
+
++ Request
+
+        {        
+            "date_in": "2023-01-20",
+            "time_in": "2023-01-20 08:00:00 UTC",
+            "date_out": "2023-01-20",
+            "time_out": "2023-01-20 16:00:00 UTC"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "date_in": "2023-01-20",
+            "time_in": "2000-01-01T08:00:00.000Z",
+            "date_out": "2023-01-20",
+            "time_out": "2000-01-01T16:00:00.000Z",
+            "id": 6,
+            "employee_id": 1,
+            "gate": 1,
+            "created_at": "2023-01-14T12:05:58.308Z",
+            "updated_at": "2023-01-14T12:07:08.168Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }
+        
+### Delete a register [DELETE]
+
++ Parameters
+
+    + id: 6 (integer) - Register's ID
+
++ Response 200
+
+        {
+            "Message": "Deleted"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }   
+        
+# Group Vacations API
+
+## All Vacations [/vacations]
+
+### Return all vacations' details [GET]
+
++ Response 200
+
+        [
+            {
+                "id": 1,
+                "employee_id": 1,
+                "start_date": "2023-01-10",
+                "end_date": "2023-01-10",
+                "vacation_type": "Płatny",
+                "decision": true,
+                "created_at": "2023-01-10T10:10:16.928Z",
+                "updated_at": "2023-01-10T10:10:16.928Z"
+            },
+            {
+                "id": 2,
+                "employee_id": 1,
+                "start_date": "2023-01-15",
+                "end_date": "2023-01-15",
+                "vacation_type": "Płatny",
+                "decision": false,
+                "created_at": "2023-01-10T10:10:30.047Z",
+                "updated_at": "2023-01-10T10:15:24.260Z"
+            }
+        ]
+        
+## A Vacation [/vacations/{id}]
+        
+### Return a vacation's details [GET]
+
++ Parameters
+
+    + id: 1 (integer) - Vacation's ID
+    
++ Response 200
+
+        {
+            "id": 1,
+            "employee_id": 1,
+            "start_date": "2023-01-10",
+            "end_date": "2023-01-10",
+            "vacation_type": "Płatny",
+            "decision": true,
+            "created_at": "2023-01-10T10:10:16.928Z",
+            "updated_at": "2023-01-10T10:10:16.928Z"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+
+### Creates a vacation [POST]
+
++ Request
+
+        {
+            "employee_id": 1,
+            "start_date": "2023-01-30",
+            "end_date": "2023-01-31",
+            "vacation_type": "Płatny",
+            "decision": true
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "id": 6,
+            "employee_id": 1,
+            "start_date": "2023-01-30",
+            "end_date": "2023-01-31",
+            "vacation_type": "Płatny",
+            "decision": true,
+            "created_at": "2023-01-14T12:15:43.027Z",
+            "updated_at": "2023-01-14T12:15:43.027Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }          
+        
+### Edit a vacation [PUT]
+
++ Parameters
+
+    + id: 6 (integer) - Register's ID
+
++ Request
+
+        {
+            "decision": "false"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "decision": false,
+            "id": 6,
+            "employee_id": 1,
+            "start_date": "2023-01-30",
+            "end_date": "2023-01-31",
+            "vacation_type": "Płatny",
+            "created_at": "2023-01-14T12:15:43.027Z",
+            "updated_at": "2023-01-14T12:18:49.670Z"
+        }
+
++ Response 422 (application/json)
+
+        {
+            "Message": "Unprocessable Entity"
+        }
+
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
+        }
+        
+### Delete a vacation [DELETE]
+
++ Parameters
+
+    + id: 6 (integer) - Vacation's ID
+
++ Response 200
+
+        {
+            "Message": "Deleted"
+        }
+        
++ Response 404
+
+        {
+            "Message": "Not found"
+        }
+        
++ Response 500
+
+        {
+            "Message": "Internal Server Error"
         }
