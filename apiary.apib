@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: http://127.0.0.1:3000/
 
-# WeWork
+# CloqCards Manager
 
 It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
@@ -173,7 +173,7 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }        
+        }
         
 ### Delete an user [DELETE]
 
@@ -197,7 +197,7 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }   
+        }
         
 # Group Employees API
 
@@ -326,8 +326,8 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }        
-        
+        }
+
 ### Delete an employee [DELETE]
 
 + Parameters
@@ -350,8 +350,8 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }        
-        
+        }
+
 # Group Managers API
 
 ## All Managers [/managers]
@@ -419,14 +419,14 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }          
+        }
         
 ### Delete a manager [DELETE]
 
 + Parameters
 
     + id: 8 (integer) - Manager's ID
-
+    
 + Response 200
 
         {
@@ -437,13 +437,13 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Not found"
-        }   
+        }
         
 + Response 500
 
         {
             "Message": "Internal Server Error"
-        }        
+        }
 
 # Group Positions API
 
@@ -502,16 +502,16 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }            
+        }
         
 ## A Position [/positions/{id}]
-        
+
 ### Return a position's details [GET]
 
 + Parameters
 
     + id: 5 (integer) - Position's ID
-    
+
 + Response 200
 
         {
@@ -563,7 +563,7 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }  
+        }
         
 ### Edit a position [PUT]
 
@@ -597,7 +597,7 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }        
+        }
         
 ### Delete a position [DELETE]
 
@@ -621,8 +621,8 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }        
-
+        }
+        
 # Group Registers API
 
 ## All Registers [/registers]
@@ -791,7 +791,7 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }   
+        }
         
 # Group Vacations API
 
@@ -886,8 +886,8 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }          
-        
+        }
+
 ### Edit a vacation [PUT]
 
 + Parameters
@@ -947,4 +947,4 @@ It is an API of *CloQCards Manager* - System of generating employee's clockcards
 
         {
             "Message": "Internal Server Error"
-        }
+        }r
