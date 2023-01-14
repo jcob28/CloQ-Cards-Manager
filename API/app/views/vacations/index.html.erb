@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Vacations</h1>
+
+<div id="vacations">
+  <% @vacations.each do |vacation| %>
+    <%= render vacation %>
+    <p>
+      <%= link_to "Show this vacation", vacation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New vacation", new_vacation_path %>

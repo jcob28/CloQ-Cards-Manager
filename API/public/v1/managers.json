@@ -1,0 +1,90 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "managers",
+  "apis": [
+    {
+      "path": "/v1/managers",
+      "operations": [
+        {
+          "summary": "Returns all managers' details",
+          "nickname": "V1::Managers#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/managers",
+      "operations": [
+        {
+          "summary": "Creates a manager",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Managers#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/managers/{id}",
+      "operations": [
+        {
+          "summary": "Returns the manager's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Managers#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/managers/{id}",
+      "operations": [
+        {
+          "summary": "Deletes a manager",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Managers#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

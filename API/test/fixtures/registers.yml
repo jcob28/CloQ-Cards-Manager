@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  register_id: 1
+  employee: one
+  gate: one
+  date_in: 2022-12-18
+  time_in: 2022-12-18 11:41:17
+  date_out: 2022-12-18
+  time_out: 2022-12-18 11:41:17
+
+two:
+  register_id: 1
+  employee: two
+  gate: two
+  date_in: 2022-12-18
+  time_in: 2022-12-18 11:41:17
+  date_out: 2022-12-18
+  time_out: 2022-12-18 11:41:17

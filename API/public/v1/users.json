@@ -1,0 +1,116 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "",
+  "resourcePath": "users",
+  "apis": [
+    {
+      "path": "/v1/users",
+      "operations": [
+        {
+          "summary": "Returns all users' details",
+          "nickname": "V1::Users#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users",
+      "operations": [
+        {
+          "summary": "Creates an user",
+          "parameters": [
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Users#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users/{id}",
+      "operations": [
+        {
+          "summary": "Returns an user's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Users#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users/{id}",
+      "operations": [
+        {
+          "summary": "Updates an user's details",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            },
+            {
+              "paramType": "body",
+              "name": "body",
+              "type": "string",
+              "description": "Request body",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Users#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users/{id}",
+      "operations": [
+        {
+          "summary": "Deletes an user",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "User ID",
+              "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
+            }
+          ],
+          "nickname": "V1::Users#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

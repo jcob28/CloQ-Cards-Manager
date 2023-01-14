@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vacation_id: 1
+  employee: one
+  start_date: 2022-12-18
+  end_date: 2022-12-18
+  vacation_type: MyString
+  decision: false
+
+two:
+  vacation_id: 1
+  employee: two
+  start_date: 2022-12-18
+  end_date: 2022-12-18
+  vacation_type: MyString
+  decision: false

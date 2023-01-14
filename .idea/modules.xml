@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/API.iml" filepath="$PROJECT_DIR$/.idea/modules/API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ServerApp.iml" filepath="$PROJECT_DIR$/.idea/ServerApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServerApp/vendor/bundle/ruby/3.0.0/gems/concurrent-ruby-1.1.10/concurrent-ruby-1.1.10.iml" filepath="$PROJECT_DIR$/ServerApp/vendor/bundle/ruby/3.0.0/gems/concurrent-ruby-1.1.10/concurrent-ruby-1.1.10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/concurrent-ruby-1.1.101.iml" filepath="$PROJECT_DIR$/.idea/modules/concurrent-ruby-1.1.101.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/method_source-1.0.0.iml" filepath="$PROJECT_DIR$/.idea/modules/method_source-1.0.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net-protocol-0.2.1.iml" filepath="$PROJECT_DIR$/.idea/modules/net-protocol-0.2.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nokogiri-1.13.10-x86_64-darwin.iml" filepath="$PROJECT_DIR$/.idea/modules/nokogiri-1.13.10-x86_64-darwin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nokogiri-1.13.10-x86_64-linux.iml" filepath="$PROJECT_DIR$/.idea/modules/nokogiri-1.13.10-x86_64-linux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/public_suffix-5.0.1.iml" filepath="$PROJECT_DIR$/.idea/modules/public_suffix-5.0.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/regexp_parser-2.6.1.iml" filepath="$PROJECT_DIR$/.idea/modules/regexp_parser-2.6.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ruby-graphviz-1.2.5.iml" filepath="$PROJECT_DIR$/.idea/modules/ruby-graphviz-1.2.5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/selenium-webdriver-4.7.1.iml" filepath="$PROJECT_DIR$/.idea/modules/selenium-webdriver-4.7.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sqlite3-1.5.4-x86_64-darwin.iml" filepath="$PROJECT_DIR$/.idea/modules/sqlite3-1.5.4-x86_64-darwin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sqlite3-1.5.4-x86_64-linux.iml" filepath="$PROJECT_DIR$/.idea/modules/sqlite3-1.5.4-x86_64-linux.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/swagger-docs-0.2.9.iml" filepath="$PROJECT_DIR$/.idea/modules/swagger-docs-0.2.9.iml" />
+    </modules>
+  </component>
+</project>
