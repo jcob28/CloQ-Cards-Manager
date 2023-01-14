@@ -1,6 +1,12 @@
 from global_storage import GlobalStorage
 from requests import post, get, put, delete # Biblioteka request służy do łączenia się z API 
 
+"""
+IMPORTANT! Moduł managera miał być napisany, ale nie starczyło na to czasu. Nie jest on jeszcze działający,
+stąd został wyłączony. Uznajemy, że to firma informatyczna i managerowie umieją korzystać z systemu używając
+np. Postmana (współczuję im pracy).
+"""
+
 class EmpolyeeManager:
 
     def __init__(self, global_storage: GlobalStorage, employeeId: int) -> None:
