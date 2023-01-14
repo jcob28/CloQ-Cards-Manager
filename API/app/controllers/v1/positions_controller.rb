@@ -2,7 +2,7 @@ module V1
 
   class PositionsController < ApplicationController
     before_action :set_position, only: %i[ show edit update destroy ]
-    before_action :authenticate_request, only: %i[ create update destroy ]
+    before_action :authenticate_request, only: %i[ index show create update destroy ]
 
     swagger_controller :positions, 'Positions'
 

@@ -13,9 +13,9 @@ module V1
       user = User.find_by_login(params[:login])
       if user && user.authenticate(params[:password])
         token = jwt_encode(user_id: user.id)
-        render json: { "token": token }, status: :ok
+        render json: { "Token": token }, status: :ok
       else
-        render json: { "error": "Incorrect login or password" }, status: :unauthorized
+        render json: { "Error": "Incorrect login or password" }, status: :unauthorized
       end
     end
   end

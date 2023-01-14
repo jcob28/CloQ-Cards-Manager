@@ -1,7 +1,7 @@
 module V1
   class RegistersController < ApplicationController
     before_action :set_register, only: %i[ show edit update destroy ]
-    before_action :authenticate_request, only: %i[ create update destroy ]
+    before_action :authenticate_request, only: %i[ update destroy ]
 
     swagger_controller :registers, 'Registers'
 

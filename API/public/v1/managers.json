@@ -26,6 +26,13 @@
               "type": "string",
               "description": "Request body",
               "required": true
+            },
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Token",
+              "required": true
             }
           ],
           "nickname": "V1::Managers#create",
@@ -49,39 +56,6 @@
           ],
           "nickname": "V1::Managers#show",
           "method": "get"
-        }
-      ]
-    },
-    {
-      "path": "/v1/managers/{id}",
-      "operations": [
-        {
-          "summary": "Updates the manager's details",
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "id",
-              "type": "integer",
-              "description": "User ID",
-              "required": true
-            },
-            {
-              "paramType": "body",
-              "name": "body",
-              "type": "string",
-              "description": "Request body",
-              "required": true
-            },
-            {
-              "paramType": "header",
-              "name": "Authorization",
-              "type": "string",
-              "description": "Token",
-              "required": true
-            }
-          ],
-          "nickname": "V1::Managers#update",
-          "method": "patch"
         }
       ]
     },

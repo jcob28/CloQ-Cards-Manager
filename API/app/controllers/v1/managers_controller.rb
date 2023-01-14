@@ -1,7 +1,7 @@
 module V1
   class ManagersController < ApplicationController
     before_action :set_manager, only: %i[ show edit update destroy ]
-    before_action :authenticate_request, only: %i[ create update destroy ]
+    before_action :authenticate_request, only: %i[ create destroy ]
 
     swagger_controller :managers, 'Managers'
 

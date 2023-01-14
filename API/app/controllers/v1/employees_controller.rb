@@ -1,7 +1,7 @@
 module V1
   class EmployeesController < ApplicationController
     before_action :set_employee, only: %i[ show update destroy ]
-    before_action :authenticate_request, only: [ :create, :update, :destroy ]
+    before_action :authenticate_request, only: %i[ create update destroy ]
 
     swagger_controller :employees, 'Employees'
 

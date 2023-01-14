@@ -10,7 +10,14 @@
 			"name": "Returns all positions' details",
 			"request": {
 				"auth": {
-					"type": "bearer"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NzM2OTk5NTJ9.31Sky8bKFUkTMrR0mO4xC-qzyDLVwoQ_pIcBrSdCEEc",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
